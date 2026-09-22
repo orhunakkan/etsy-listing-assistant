@@ -1,6 +1,6 @@
 # ---- build stage -------------------------------------------------------
 # Install all deps and compile both workspaces.
-FROM node:24-alpine AS builder
+FROM node:25-alpine AS builder
 WORKDIR /app
 
 # Copy workspace manifests first so Docker can cache the install layer.
@@ -19,7 +19,7 @@ RUN npm run build
 
 # ---- runtime stage -----------------------------------------------------
 # Lean production image: only production deps + compiled artefacts.
-FROM node:24-alpine AS runtime
+FROM node:25-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
 
