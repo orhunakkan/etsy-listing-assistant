@@ -4,7 +4,7 @@ FROM node:24-alpine AS builder
 WORKDIR /app
 
 # Copy workspace manifests first so Docker can cache the install layer.
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json .npmrc ./
 COPY client/package.json ./client/
 COPY server/package.json ./server/
 RUN npm ci
@@ -24,7 +24,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 # Install production dependencies only.
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json .npmrc ./
 COPY client/package.json ./client/
 COPY server/package.json ./server/
 RUN npm ci --omit=dev
