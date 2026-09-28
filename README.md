@@ -12,7 +12,6 @@ The app intentionally does not ship answer tests for learners. Its job is to pro
 - [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
 - [Available Scripts](#available-scripts)
-- [Playwright MCP](#playwright-mcp)
 - [Application URLs](#application-urls)
 - [Project Structure](#project-structure)
 - [Architecture](#architecture)
@@ -106,23 +105,6 @@ npm run test:run --workspace=server
 npm run typecheck --workspace=client
 npm run typecheck --workspace=server
 ```
-
-## Playwright MCP
-
-This repo includes a `.mcp.json` file with the standard Playwright MCP server configuration:
-
-```json
-{
-  "mcpServers": {
-    "playwright": {
-      "command": "npx",
-      "args": ["@playwright/mcp@latest"]
-    }
-  }
-}
-```
-
-MCP clients that support repo-local configuration can load it directly. For clients that require user-level setup, add the same server configuration in the client settings.
 
 ## Application URLs
 
