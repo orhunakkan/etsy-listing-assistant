@@ -109,7 +109,7 @@ export function ServerSentEvents() {
             onClick={startStream}
             disabled={streaming}
             aria-label="Start Stream"
-            className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-brand-500"
           >
             Start Stream
           </button>
@@ -118,7 +118,7 @@ export function ServerSentEvents() {
             onClick={stopStream}
             disabled={!streaming}
             aria-label="Stop Stream"
-            className="rounded-md border border-edge px-4 py-2 text-sm font-medium text-content hover:bg-canvas disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="rounded-md border border-edge px-4 py-2 text-sm font-medium text-content hover:bg-canvas disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-brand-500"
           >
             Stop Stream
           </button>

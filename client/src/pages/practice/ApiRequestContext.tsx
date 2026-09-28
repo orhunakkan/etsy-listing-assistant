@@ -90,7 +90,7 @@ export function ApiRequestContext() {
         directly — seed data before a UI test, then verify the UI reflects it.
       </p>
 
-      <div className="mb-4 rounded-xl border border-indigo-100 bg-indigo-50 p-4 text-sm text-indigo-800 dark:border-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
+      <div className="mb-4 rounded-xl border border-brand-100 bg-brand-50 p-4 text-sm text-brand-800 dark:border-brand-700 dark:bg-brand-950 dark:text-brand-300">
         <p className="font-medium">API endpoints</p>
         <ul className="mt-2 space-y-0.5 font-mono text-xs">
           <li>GET &nbsp;&nbsp;/api/tasks</li>
@@ -117,12 +117,12 @@ export function ApiRequestContext() {
           onChange={(e) => setNewTitle(e.target.value)}
           aria-label="New task title"
           placeholder="New task…"
-          className="flex-1 rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none"
+          className="flex-1 rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-brand-500 focus:outline-none"
         />
         <button
           type="submit"
           disabled={adding || !newTitle.trim()}
-          className="rounded-lg bg-indigo-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+          className="rounded-lg bg-brand-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
         >
           Add
         </button>
@@ -134,7 +134,7 @@ export function ApiRequestContext() {
           aria-label="Loading tasks"
           className="flex items-center gap-2 text-sm text-muted"
         >
-          <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-edge border-t-indigo-600" />
+          <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-edge border-t-brand-600" />
           Loading…
         </div>
       ) : (
@@ -155,7 +155,7 @@ export function ApiRequestContext() {
                 checked={task.done}
                 onChange={() => void toggleTask(task.id, task.done)}
                 aria-label={`Mark "${task.title}" as ${task.done ? 'incomplete' : 'complete'}`}
-                className="h-4 w-4 accent-indigo-600"
+                className="h-4 w-4 accent-brand-600"
               />
               <span
                 className={`flex-1 text-sm ${task.done ? 'text-muted line-through' : 'text-content'}`}
@@ -167,7 +167,7 @@ export function ApiRequestContext() {
                 type="button"
                 onClick={() => void deleteTask(task.id)}
                 aria-label={`Delete ${task.title}`}
-                className="text-xs text-red-500 hover:text-red-700"
+                className="text-xs text-red-700 hover:text-red-800"
               >
                 ✕
               </button>

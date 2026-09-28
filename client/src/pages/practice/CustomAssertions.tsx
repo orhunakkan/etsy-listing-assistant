@@ -63,7 +63,7 @@ export function CustomAssertions() {
                 data-testid={`star-${star}`}
                 className={[
                   'text-2xl transition-colors',
-                  star <= rating ? 'text-amber-500' : 'text-muted',
+                  star <= rating ? 'text-amber-700' : 'text-muted',
                 ].join(' ')}
               >
                 ★

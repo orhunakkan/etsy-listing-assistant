@@ -1,5 +1,34 @@
 @import 'tailwindcss';
 
+/* `dark:` utilities follow the `.dark` class set by the theme toggle (Shell), */
+/* not the OS preference — otherwise they disagree with the semantic tokens.  */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Typography ───────────────────────────────────────────────────────────── */
+/* Fonts are self-hosted via Fontsource (imported in main.tsx) because the    */
+/* server CSP only allows font-src 'self'.                                    */
+@theme {
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+
+  /* ── Brand ramp ─────────────────────────────────────────────────────────── */
+  /* Warm vermilion scale used for buttons, focus rings, chips and highlights. */
+  /* Steps follow Tailwind's lightness curve so -600 + white text and          */
+  /* -700 on -50 keep AA contrast just like the default palettes.              */
+  --color-brand-50: #fdf4ee;
+  --color-brand-100: #f8e4d6;
+  --color-brand-200: #f2c6aa;
+  --color-brand-300: #f4b88c;
+  --color-brand-400: #f09a5b;
+  --color-brand-500: #dc6a2c;
+  --color-brand-600: #b2360e; /* white text: 6.1:1 ✓ AA */
+  --color-brand-700: #942c0b;
+  --color-brand-800: #7a250c;
+  --color-brand-900: #5e1f0d;
+  --color-brand-950: #3a1a0e; /* brand-300 text on it: 9.1:1 ✓ AAA */
+}
+
 /* ── Semantic color tokens ────────────────────────────────────────────────── */
 /* Register as Tailwind utilities via @theme inline so values resolve at      */
 /* runtime (enabling dark-mode swaps) rather than being statically inlined.   */
@@ -14,23 +43,23 @@
 }
 
 :root {
-  --canvas: #fafafa; /* zinc-50  */
-  --surface: #ffffff; /* white    */
-  --surface-raised: #f4f4f5; /* zinc-100 */
-  --content: #18181b; /* zinc-900 — text-content on canvas: 14.7:1 ✓ AAA */
-  --muted: #696969; /* #696969 — text-muted on canvas: 5.5:1 ✓ AA; on surface-raised: 5.3:1 ✓ AA */
-  --edge: #e4e4e7; /* zinc-200 */
-  --accent: #4f46e5; /* indigo-600 */
+  --canvas: #f5f1e8; /* warm ivory */
+  --surface: #fffcf6;
+  --surface-raised: #ede6d8;
+  --content: #1d1b17; /* text-content on canvas: 15.3:1 ✓ AAA */
+  --muted: #6a6358; /* text-muted on canvas: 5.3:1 ✓ AA; on surface-raised: 4.8:1 ✓ AA */
+  --edge: #e0d8c8;
+  --accent: #b2360e; /* brand-600 — on surface: 6.0:1 ✓ AA */
 }
 
 .dark {
-  --canvas: #18181b; /* zinc-900 */
-  --surface: #27272a; /* zinc-800 */
-  --surface-raised: #333336; /* zinc-750 approx — passes 4.5:1 AA with muted text */
-  --content: #f4f4f5; /* zinc-100 — text-content on canvas: 14.7:1 ✓ AAA */
-  --muted: #a1a1aa; /* zinc-400 — text-muted on canvas:    4.6:1 ✓ AA  */
-  --edge: #3f3f46; /* zinc-700 */
-  --accent: #818cf8; /* indigo-400 — on canvas: 4.7:1 ✓ AA */
+  --canvas: #12110f; /* warm charcoal */
+  --surface: #1b1916;
+  --surface-raised: #27241f;
+  --content: #f1ece2; /* text-content on canvas: 16.0:1 ✓ AAA */
+  --muted: #a69e90; /* text-muted on canvas: 7.1:1 ✓ AAA; on surface-raised: 5.8:1 ✓ AA */
+  --edge: #34302a;
+  --accent: #f09a5b; /* brand-400 — on canvas: 8.5:1 ✓ AAA */
 }
 
 @layer base {
@@ -41,7 +70,7 @@
 
   /* Native option popups can ignore dark backgrounds while inheriting light text. */
   select option {
-    background-color: #ffffff;
-    color: #18181b;
+    background-color: #fffcf6;
+    color: #1d1b17;
   }
 }

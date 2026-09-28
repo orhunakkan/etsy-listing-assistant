@@ -42,7 +42,7 @@ function CountdownTimer() {
         {String(remaining % 60).padStart(2, '0')}
       </p>
       {expired && (
-        <p role="alert" className="mt-1 text-sm font-medium text-red-600 dark:text-red-400">
+        <p role="alert" className="mt-1 text-sm font-medium text-red-700 dark:text-red-400">
           Time&apos;s up!
         </p>
       )}
@@ -51,7 +51,7 @@ function CountdownTimer() {
           type="button"
           onClick={() => setRunning((r) => !r)}
           disabled={expired}
-          className="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+          className="rounded-lg bg-brand-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
         >
           {running ? 'Pause' : 'Start'}
         </button>
@@ -125,7 +125,7 @@ function SessionToast() {
               setActive(false);
             }}
             aria-label="Dismiss session warning"
-            className="shrink-0 text-amber-600 hover:text-amber-800 dark:text-amber-400 dark:hover:text-amber-200"
+            className="shrink-0 text-amber-700 hover:text-amber-800 dark:text-amber-400 dark:hover:text-amber-200"
           >
             ✕
           </button>

@@ -5,7 +5,7 @@ import { labs } from '../../labs';
 const lab = labs.find((l) => l.slug === 'touch-gestures')!;
 
 const SLIDES = [
-  { id: 1, title: 'Slide 1 — Tap', colour: 'bg-indigo-500', emoji: '👆' },
+  { id: 1, title: 'Slide 1 — Tap', colour: 'bg-brand-500', emoji: '👆' },
   { id: 2, title: 'Slide 2 — Swipe', colour: 'bg-emerald-600', emoji: '👈' },
   { id: 3, title: 'Slide 3 — Pinch', colour: 'bg-rose-500', emoji: '🤏' },
 ];
@@ -35,7 +35,7 @@ function TapCounter() {
         type="button"
         aria-label="Tap target"
         onTouchStart={handleTouchStart}
-        className="mt-4 flex h-20 w-20 items-center justify-center rounded-full bg-indigo-600 text-2xl text-white shadow-md select-none touch-none focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        className="mt-4 flex h-20 w-20 items-center justify-center rounded-full bg-brand-600 text-2xl text-white shadow-md select-none touch-none focus:outline-none focus:ring-2 focus:ring-brand-400"
       >
         👆
       </button>
@@ -124,7 +124,7 @@ function SwipeCarousel() {
             aria-current={i === current ? 'true' : undefined}
             onClick={() => setCurrent(i)}
             className={`h-2.5 w-2.5 rounded-full transition-colors ${
-              i === current ? 'bg-indigo-600' : 'bg-gray-300'
+              i === current ? 'bg-brand-600' : 'bg-gray-300'
             }`}
           />
         ))}
@@ -188,7 +188,7 @@ function TouchInfo() {
       <button
         type="button"
         onClick={inspect}
-        className="mt-4 rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+        className="mt-4 rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
       >
         Inspect Touch Points
       </button>

@@ -48,14 +48,14 @@ export function MultiTabPopup() {
             value={value}
             onChange={(e) => setValue(e.target.value)}
             aria-label="Value to send to opener"
-            className="mt-1 block w-full rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none"
+            className="mt-1 block w-full rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-brand-500 focus:outline-none"
           />
         </label>
         <button
           type="button"
           onClick={sendResult}
           data-testid="send-result"
-          className="w-full rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+          className="w-full rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
         >
           Send result to opener
         </button>
@@ -63,7 +63,7 @@ export function MultiTabPopup() {
           <p
             role="status"
             aria-live="polite"
-            className="text-center text-sm text-emerald-600 dark:text-emerald-400"
+            className="text-center text-sm text-emerald-700 dark:text-emerald-400"
           >
             ✓ Sent!
           </p>

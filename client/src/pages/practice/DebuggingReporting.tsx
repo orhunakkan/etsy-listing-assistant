@@ -61,7 +61,7 @@ export function DebuggingReporting() {
               type="button"
               onClick={() => void handleFlaky()}
               data-testid="flaky-button"
-              className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+              className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
             >
               Click me (flaky)
             </button>
@@ -70,7 +70,7 @@ export function DebuggingReporting() {
                 role="status"
                 aria-live="polite"
                 data-testid="flaky-success"
-                className="text-sm font-medium text-emerald-600 dark:text-emerald-400"
+                className="text-sm font-medium text-emerald-700 dark:text-emerald-400"
               >
                 ✓ Success
               </span>
@@ -79,7 +79,7 @@ export function DebuggingReporting() {
               <span
                 role="alert"
                 data-testid="flaky-error"
-                className="text-sm font-medium text-red-600 dark:text-red-400"
+                className="text-sm font-medium text-red-700 dark:text-red-400"
               >
                 ✗ Error — this was the flaky click
               </span>
@@ -111,7 +111,7 @@ export function DebuggingReporting() {
               aria-label="Loading"
               className="mt-3 flex items-center gap-2 text-sm text-muted"
             >
-              <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-edge border-t-indigo-600" />
+              <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-edge border-t-brand-600" />
               Processing…
             </div>
           )}
@@ -120,7 +120,7 @@ export function DebuggingReporting() {
               role="status"
               aria-live="polite"
               data-testid="slow-result"
-              className="mt-3 text-sm text-emerald-600 dark:text-emerald-400"
+              className="mt-3 text-sm text-emerald-700 dark:text-emerald-400"
             >
               ✓ Operation complete
             </p>
@@ -169,7 +169,7 @@ export function DebuggingReporting() {
           {screenshotHint && (
             <div
               data-testid="expandable-panel"
-              className="mt-3 rounded-xl border border-indigo-200 bg-indigo-50 px-4 py-3 text-sm text-indigo-800 dark:border-indigo-700 dark:bg-indigo-950 dark:text-indigo-300"
+              className="mt-3 rounded-xl border border-brand-200 bg-brand-50 px-4 py-3 text-sm text-brand-800 dark:border-brand-700 dark:bg-brand-950 dark:text-brand-300"
             >
               📸 Take a screenshot here. This content should appear in the trace viewer and HTML
               report when you attach it.

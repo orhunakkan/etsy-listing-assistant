@@ -58,7 +58,7 @@ export function StorageState() {
             <p className="text-xs font-medium text-muted">Admin user</p>
             <p className="font-mono text-xs text-muted">username: alice</p>
             <p className="font-mono text-xs text-muted">password: password123</p>
-            <span className="mt-1 inline-block rounded bg-indigo-100 px-1.5 py-0.5 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
+            <span className="mt-1 inline-block rounded bg-brand-100 px-1.5 py-0.5 text-xs text-brand-700 dark:bg-brand-950 dark:text-brand-300">
               role: admin
             </span>
           </div>
@@ -75,7 +75,7 @@ export function StorageState() {
           Log in at{' '}
           <a
             href="/practice/fake-auth"
-            className="text-accent underline hover:text-indigo-800 dark:hover:text-indigo-300"
+            className="text-accent underline hover:text-brand-800 dark:hover:text-brand-300"
           >
             /practice/fake-auth
           </a>{' '}
@@ -98,7 +98,7 @@ export function StorageState() {
           aria-label="Loading profile"
           className="flex items-center gap-2 text-sm text-muted"
         >
-          <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-edge border-t-indigo-600" />
+          <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-edge border-t-brand-600" />
           Loading…
         </div>
       ) : profile ? (
@@ -106,7 +106,7 @@ export function StorageState() {
           {/* Profile card */}
           <div data-testid="profile-card" className="rounded-xl border border-edge bg-surface p-5">
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-lg font-bold text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-100 text-lg font-bold text-brand-700 dark:bg-brand-950 dark:text-brand-300">
                 {profile.displayName[0]}
               </div>
               <div>
@@ -119,7 +119,7 @@ export function StorageState() {
                 data-testid="user-role"
                 className={`ml-auto rounded-full px-3 py-1 text-xs font-medium ${
                   profile.role === 'admin'
-                    ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300'
+                    ? 'bg-brand-100 text-brand-700 dark:bg-brand-950 dark:text-brand-300'
                     : 'bg-surface-raised text-muted'
                 }`}
               >
@@ -133,15 +133,15 @@ export function StorageState() {
             <div
               data-testid="admin-panel"
               aria-label="Admin panel"
-              className="rounded-xl border border-indigo-200 bg-indigo-50 p-5 dark:border-indigo-700 dark:bg-indigo-950"
+              className="rounded-xl border border-brand-200 bg-brand-50 p-5 dark:border-brand-700 dark:bg-brand-950"
             >
-              <h2 className="mb-3 text-sm font-semibold text-indigo-900 dark:text-indigo-300">
+              <h2 className="mb-3 text-sm font-semibold text-brand-900 dark:text-brand-300">
                 Admin panel
               </h2>
               <div className="grid grid-cols-2 gap-3">
-                <div className="rounded-lg border border-indigo-200 bg-surface p-3 text-center dark:border-indigo-700">
+                <div className="rounded-lg border border-brand-200 bg-surface p-3 text-center dark:border-brand-700">
                   <p
-                    className="text-2xl font-bold text-indigo-700 dark:text-indigo-300"
+                    className="text-2xl font-bold text-brand-700 dark:text-brand-300"
                     data-testid="total-users"
                   >
                     {adminData.totalUsers}
@@ -150,7 +150,7 @@ export function StorageState() {
                 </div>
                 <div className="rounded-lg border border-amber-200 bg-surface p-3 text-center dark:border-amber-700">
                   <p
-                    className="text-2xl font-bold text-amber-600 dark:text-amber-400"
+                    className="text-2xl font-bold text-amber-700 dark:text-amber-400"
                     data-testid="pending-reviews"
                   >
                     {adminData.pendingReviews}
@@ -183,7 +183,7 @@ export function StorageState() {
             Not authenticated. Log in at{' '}
             <a
               href="/practice/fake-auth"
-              className="text-accent underline hover:text-indigo-800 dark:hover:text-indigo-300"
+              className="text-accent underline hover:text-brand-800 dark:hover:text-brand-300"
             >
               /practice/fake-auth
             </a>{' '}

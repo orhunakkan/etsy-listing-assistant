@@ -36,7 +36,7 @@ export function MultiTabWindow() {
           <button
             type="button"
             onClick={() => setCount((n) => n + 1)}
-            className="mt-3 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+            className="mt-3 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
           >
             Increment
           </button>

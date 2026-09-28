@@ -44,7 +44,7 @@ export function DomMemoryDiagnostics() {
           <button
             type="button"
             onClick={spawnFifty}
-            className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700"
+            className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-700"
           >
             Spawn 50 toasts
           </button>

@@ -168,7 +168,7 @@ function QueryPanel<T>({
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder={searchPlaceholder}
-              className="rounded-lg border border-edge px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="rounded-lg border border-edge px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
             />
           </div>
         )}
@@ -224,7 +224,7 @@ function QueryPanel<T>({
         <button
           type="button"
           onClick={() => void runQuery(1)}
-          className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-700"
+          className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-700"
         >
           Run Query
         </button>
@@ -375,7 +375,7 @@ export function BookCatalog() {
               className={[
                 'rounded-lg px-3 py-1.5 text-sm font-medium transition-colors',
                 activeTab === tab.id
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-brand-600 text-white'
                   : 'border border-edge text-content hover:bg-surface-raised',
               ].join(' ')}
             >

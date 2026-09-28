@@ -53,7 +53,7 @@ export function FakeAuth() {
               onChange={(e) => setUsername(e.target.value)}
               autoComplete="username"
               required
-              className="rounded-lg border border-edge px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="rounded-lg border border-edge px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
             />
           </div>
 
@@ -68,12 +68,12 @@ export function FakeAuth() {
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
               required
-              className="rounded-lg border border-edge px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="rounded-lg border border-edge px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
             />
           </div>
 
           {error && (
-            <p role="alert" className="text-sm text-red-600 dark:text-red-400">
+            <p role="alert" className="text-sm text-red-700 dark:text-red-400">
               {error}
             </p>
           )}
@@ -81,7 +81,7 @@ export function FakeAuth() {
           <button
             type="submit"
             disabled={loading || !username || !password}
-            className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? 'Signing in…' : 'Sign in'}
           </button>

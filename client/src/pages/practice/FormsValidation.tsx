@@ -57,7 +57,7 @@ function fieldClassName(hasError: boolean): string {
     'rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-1',
     hasError
       ? 'border-red-400 focus:border-red-400 focus:ring-red-400'
-      : 'border-edge focus:border-indigo-500 focus:ring-indigo-500',
+      : 'border-edge focus:border-brand-500 focus:ring-brand-500',
   ].join(' ');
 }
 
@@ -93,7 +93,7 @@ export function FormsValidation() {
           <h2 className="mt-2 text-lg font-semibold text-emerald-800 dark:text-emerald-300">
             Subscribed!
           </h2>
-          <p className="mt-1 text-sm text-emerald-600 dark:text-emerald-400">
+          <p className="mt-1 text-sm text-emerald-700 dark:text-emerald-400">
             Welcome, {form.name}.
           </p>
           <button
@@ -132,7 +132,7 @@ export function FormsValidation() {
         <div className="flex flex-col gap-1">
           <label htmlFor="full-name" className="text-sm font-medium text-muted">
             Full name{' '}
-            <span aria-hidden="true" className="text-red-500">
+            <span aria-hidden="true" className="text-red-700">
               *
             </span>
           </label>
@@ -148,7 +148,7 @@ export function FormsValidation() {
             className={fieldClassName(!!nameError)}
           />
           {nameError && (
-            <p id="name-error" role="alert" className="text-xs text-red-600">
+            <p id="name-error" role="alert" className="text-xs text-red-700">
               {nameError}
             </p>
           )}
@@ -158,7 +158,7 @@ export function FormsValidation() {
         <div className="flex flex-col gap-1">
           <label htmlFor="email-address" className="text-sm font-medium text-muted">
             Email address{' '}
-            <span aria-hidden="true" className="text-red-500">
+            <span aria-hidden="true" className="text-red-700">
               *
             </span>
           </label>
@@ -174,7 +174,7 @@ export function FormsValidation() {
             className={fieldClassName(!!emailError)}
           />
           {emailError && (
-            <p id="email-error" role="alert" className="text-xs text-red-600">
+            <p id="email-error" role="alert" className="text-xs text-red-700">
               {emailError}
             </p>
           )}
@@ -184,7 +184,7 @@ export function FormsValidation() {
         <div className="flex flex-col gap-1">
           <label htmlFor="topic-category" className="text-sm font-medium text-muted">
             Topic category{' '}
-            <span aria-hidden="true" className="text-red-500">
+            <span aria-hidden="true" className="text-red-700">
               *
             </span>
           </label>
@@ -205,7 +205,7 @@ export function FormsValidation() {
             ))}
           </select>
           {categoryError && (
-            <p id="category-error" role="alert" className="text-xs text-red-600">
+            <p id="category-error" role="alert" className="text-xs text-red-700">
               {categoryError}
             </p>
           )}
@@ -215,7 +215,7 @@ export function FormsValidation() {
         <fieldset>
           <legend className="text-sm font-medium text-muted">
             Email frequency{' '}
-            <span aria-hidden="true" className="text-red-500">
+            <span aria-hidden="true" className="text-red-700">
               *
             </span>
           </legend>
@@ -234,7 +234,7 @@ export function FormsValidation() {
                       updateField('frequency', e.target.value);
                       touch('frequency');
                     }}
-                    className="accent-indigo-600"
+                    className="accent-brand-600"
                   />
                   <span className="text-sm text-muted">{frequency}</span>
                 </label>
@@ -242,7 +242,7 @@ export function FormsValidation() {
             })}
           </div>
           {frequencyError && (
-            <p id="frequency-error" role="alert" className="mt-1 text-xs text-red-600">
+            <p id="frequency-error" role="alert" className="mt-1 text-xs text-red-700">
               {frequencyError}
             </p>
           )}
@@ -258,7 +258,7 @@ export function FormsValidation() {
             type="file"
             accept="image/*"
             onChange={(e) => updateField('file', e.target.files?.[0] ?? null)}
-            className="text-sm text-muted file:mr-3 file:rounded-lg file:border-0 file:bg-indigo-50 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-indigo-700 hover:file:bg-indigo-100 dark:file:bg-indigo-950 dark:file:text-indigo-300 dark:hover:file:bg-indigo-900"
+            className="text-sm text-muted file:mr-3 file:rounded-lg file:border-0 file:bg-brand-50 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-brand-700 hover:file:bg-brand-100 dark:file:bg-brand-950 dark:file:text-brand-300 dark:hover:file:bg-brand-900"
           />
           {form.file && <p className="text-xs text-muted">Selected: {form.file.name}</p>}
         </div>
@@ -275,7 +275,7 @@ export function FormsValidation() {
               }}
               aria-required="true"
               aria-invalid={!!agreedError}
-              className="mt-0.5 accent-indigo-600"
+              className="mt-0.5 accent-brand-600"
             />
             <span className="text-sm text-muted">
               I agree to the{' '}
@@ -285,7 +285,7 @@ export function FormsValidation() {
             </span>
           </label>
           {agreedError && (
-            <p id="agreed-error" role="alert" className="text-xs text-red-600">
+            <p id="agreed-error" role="alert" className="text-xs text-red-700">
               {agreedError}
             </p>
           )}
@@ -294,13 +294,13 @@ export function FormsValidation() {
         <button
           type="submit"
           disabled={!isValid}
-          className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Subscribe
         </button>
 
         <p className="text-xs text-muted">
-          <span aria-hidden="true" className="text-red-500">
+          <span aria-hidden="true" className="text-red-700">
             *
           </span>{' '}
           Required fields

@@ -63,7 +63,7 @@ function MotionPanel() {
       </p>
       <div
         aria-hidden="true"
-        className="mt-4 h-6 w-6 rounded-full bg-indigo-500"
+        className="mt-4 h-6 w-6 rounded-full bg-brand-500"
         style={label === 'Motion on' ? { animation: 'spin 1s linear infinite' } : undefined}
       />
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>

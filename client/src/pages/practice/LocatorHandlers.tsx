@@ -50,7 +50,7 @@ function NewsletterModal({ onDismiss }: { onDismiss: () => void }) {
           <button
             type="button"
             onClick={onDismiss}
-            className="rounded bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700"
+            className="rounded bg-brand-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-700"
           >
             No thanks
           </button>
@@ -76,7 +76,7 @@ function SurveyDialog({ onDismiss }: { onDismiss: () => void }) {
         <button
           type="button"
           onClick={onDismiss}
-          className="mt-4 rounded border border-edge bg-surface px-3 py-1.5 text-sm font-medium text-content hover:border-indigo-300"
+          className="mt-4 rounded border border-edge bg-surface px-3 py-1.5 text-sm font-medium text-content hover:border-brand-300"
         >
           Skip Survey
         </button>
@@ -128,7 +128,7 @@ export function LocatorHandlers() {
             type="checkbox"
             checked={forceOverlays}
             onChange={(e) => setForceOverlays(e.target.checked)}
-            className="h-4 w-4 rounded border-edge text-indigo-600 focus:ring-indigo-500"
+            className="h-4 w-4 rounded border-edge text-brand-600 focus:ring-brand-500"
             aria-label="Force overlays every step"
           />
           Force overlays every step
@@ -155,7 +155,7 @@ export function LocatorHandlers() {
                 i < step
                   ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300'
                   : i === step
-                    ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300'
+                    ? 'bg-brand-100 text-brand-700 dark:bg-brand-950 dark:text-brand-300'
                     : 'bg-surface text-muted border border-edge',
               ].join(' ')}
             >
@@ -167,7 +167,7 @@ export function LocatorHandlers() {
         <div className="mt-6">
           {isComplete ? (
             <div role="status" className="text-center">
-              <p className="text-lg font-semibold text-emerald-600 dark:text-emerald-400">
+              <p className="text-lg font-semibold text-emerald-700 dark:text-emerald-400">
                 Order Confirmed!
               </p>
               <p className="mt-1 text-sm text-muted">Thank you for your purchase.</p>
@@ -177,7 +177,7 @@ export function LocatorHandlers() {
                   setStep(0);
                   setOverlay(null);
                 }}
-                className="mt-4 rounded border border-edge px-4 py-2 text-sm text-muted hover:border-indigo-300"
+                className="mt-4 rounded border border-edge px-4 py-2 text-sm text-muted hover:border-brand-300"
               >
                 Start over
               </button>
@@ -190,7 +190,7 @@ export function LocatorHandlers() {
               <button
                 type="button"
                 onClick={handleNext}
-                className="mt-4 rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="mt-4 rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500"
               >
                 {step === STEPS.length - 2 ? 'Place Order' : 'Next'}
               </button>

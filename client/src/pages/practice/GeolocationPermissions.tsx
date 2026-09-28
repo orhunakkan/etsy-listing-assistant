@@ -88,7 +88,7 @@ export function GeolocationPermissions() {
         <button
           type="button"
           onClick={findCafes}
-          className="mt-4 rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="mt-4 rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500"
         >
           Find Cafés Near Me
         </button>
@@ -118,7 +118,7 @@ export function GeolocationPermissions() {
         )}
 
         {geo.status === 'denied' && (
-          <p role="alert" className="mt-3 text-sm text-red-600 dark:text-red-400">
+          <p role="alert" className="mt-3 text-sm text-red-700 dark:text-red-400">
             {geo.message}
           </p>
         )}
@@ -140,14 +140,14 @@ export function GeolocationPermissions() {
           <button
             type="button"
             onClick={copyLink}
-            className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500"
           >
             Copy Share Link
           </button>
           <button
             type="button"
             onClick={pasteLink}
-            className="rounded-md border border-edge bg-surface px-4 py-2 text-sm font-medium text-content hover:border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="rounded-md border border-edge bg-surface px-4 py-2 text-sm font-medium text-content hover:border-brand-300 focus:outline-none focus:ring-2 focus:ring-brand-500"
           >
             Paste
           </button>
@@ -174,7 +174,7 @@ export function GeolocationPermissions() {
         )}
 
         {clipboard.status === 'error' && (
-          <p role="alert" className="mt-3 text-sm text-red-600 dark:text-red-400">
+          <p role="alert" className="mt-3 text-sm text-red-700 dark:text-red-400">
             {clipboard.message}
           </p>
         )}

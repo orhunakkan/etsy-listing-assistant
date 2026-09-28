@@ -105,12 +105,12 @@ export function ScrollLazyLoading() {
             onChange={(e) => setJumpValue(e.target.value)}
             placeholder="Item #"
             aria-label="Jump to item number"
-            className="w-28 rounded border border-edge bg-canvas px-3 py-1.5 text-sm text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-28 rounded border border-edge bg-canvas px-3 py-1.5 text-sm text-content focus:outline-none focus:ring-2 focus:ring-brand-500"
           />
           <button
             type="button"
             onClick={handleJump}
-            className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="rounded-md bg-brand-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500"
           >
             Jump
           </button>

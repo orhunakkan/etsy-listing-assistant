@@ -730,9 +730,9 @@ describe('VisualRegression tokens', () => {
 
   test('indigo note panel has dark-mode classes', () => {
     const { container } = wrap(<VisualRegression />);
-    const notePanel = container.querySelector('div.bg-indigo-50');
-    expect(notePanel?.className).toContain('dark:bg-indigo-950');
-    expect(notePanel?.className).toContain('dark:text-indigo-300');
+    const notePanel = container.querySelector('div.bg-brand-50');
+    expect(notePanel?.className).toContain('dark:bg-brand-950');
+    expect(notePanel?.className).toContain('dark:text-brand-300');
   });
 });
 

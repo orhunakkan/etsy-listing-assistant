@@ -77,7 +77,7 @@ export function WebSocketInterception() {
     disconnected: 'bg-surface-raised text-muted',
     connecting: 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300',
     connected: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300',
-    error: 'bg-red-100 text-red-600 dark:bg-red-950 dark:text-red-400',
+    error: 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400',
   };
 
   return (
@@ -108,7 +108,7 @@ export function WebSocketInterception() {
               onClick={connect}
               disabled={status === 'connected' || status === 'connecting'}
               data-testid="ws-connect"
-              className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+              className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
             >
               Connect
             </button>
@@ -143,7 +143,7 @@ export function WebSocketInterception() {
                 <div
                   key={msg.id}
                   className={
-                    msg.from === 'user' ? 'text-indigo-700 dark:text-indigo-300' : 'text-content'
+                    msg.from === 'user' ? 'text-brand-700 dark:text-brand-300' : 'text-content'
                   }
                 >
                   <span className="mr-2 text-muted">[{msg.at}]</span>
@@ -171,13 +171,13 @@ export function WebSocketInterception() {
               disabled={status !== 'connected'}
               aria-label="Message to send"
               placeholder="Type a message…"
-              className="flex-1 rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none disabled:opacity-50"
+              className="flex-1 rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-brand-500 focus:outline-none disabled:opacity-50"
             />
             <button
               type="submit"
               disabled={status !== 'connected' || !input.trim()}
               data-testid="ws-send"
-              className="rounded-lg bg-indigo-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+              className="rounded-lg bg-brand-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
             >
               Send
             </button>

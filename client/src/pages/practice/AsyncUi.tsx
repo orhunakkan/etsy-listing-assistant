@@ -106,7 +106,7 @@ export function AsyncUi() {
               type="button"
               onClick={() => void loadArticles(false)}
               disabled={loadState === 'loading'}
-              className="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-lg bg-brand-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
               Load articles
             </button>
@@ -114,7 +114,7 @@ export function AsyncUi() {
               type="button"
               onClick={() => void loadArticles(true)}
               disabled={loadState === 'loading'}
-              className="rounded-lg border border-red-300 px-3 py-1.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-950"
+              className="rounded-lg border border-red-300 px-3 py-1.5 text-sm font-medium text-red-700 transition-colors hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-950"
             >
               Load with error
             </button>
@@ -126,7 +126,7 @@ export function AsyncUi() {
               aria-label="Loading articles"
               className="flex items-center gap-2 text-sm text-muted"
             >
-              <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-edge border-t-indigo-600" />
+              <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-edge border-t-brand-600" />
               Loading articles…
             </div>
           )}
@@ -142,7 +142,7 @@ export function AsyncUi() {
               <button
                 type="button"
                 onClick={() => void loadArticles(false)}
-                className="mt-2 text-sm text-red-600 underline hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
+                className="mt-2 text-sm text-red-700 underline hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
               >
                 Retry
               </button>
@@ -202,7 +202,7 @@ export function AsyncUi() {
             type="button"
             onClick={() => void triggerToast()}
             disabled={toastPending || toastVisible}
-            className="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-lg bg-brand-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {toastPending ? 'Sending…' : 'Trigger notification'}
           </button>

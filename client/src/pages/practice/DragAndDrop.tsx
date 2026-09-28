@@ -95,7 +95,7 @@ function KanbanBoard() {
                 aria-label={card.title}
                 data-card-id={card.id}
                 onDragStart={() => handleDragStart(card.id, col.id)}
-                className="cursor-grab rounded-lg border border-edge bg-surface p-3 text-sm text-content shadow-sm hover:border-indigo-300 active:cursor-grabbing dark:hover:border-indigo-600"
+                className="cursor-grab rounded-lg border border-edge bg-surface p-3 text-sm text-content shadow-sm hover:border-brand-300 active:cursor-grabbing dark:hover:border-brand-600"
               >
                 {card.title}
               </div>
@@ -135,7 +135,7 @@ function FileDropZone() {
       className={[
         'flex h-28 flex-col items-center justify-center rounded-xl border-2 border-dashed transition-colors',
         over
-          ? 'border-indigo-400 bg-indigo-50 dark:border-indigo-500 dark:bg-indigo-950'
+          ? 'border-brand-400 bg-brand-50 dark:border-brand-500 dark:bg-brand-950'
           : 'border-edge bg-canvas',
       ].join(' ')}
     >
@@ -182,7 +182,7 @@ function SortableList() {
           onDragStart={() => handleDragStart(idx)}
           onDragOver={(e) => e.preventDefault()}
           onDrop={() => handleDrop(idx)}
-          className="flex cursor-grab items-center gap-3 rounded-lg border border-edge bg-surface px-4 py-2.5 text-sm font-medium text-content shadow-sm hover:border-indigo-300 active:cursor-grabbing dark:hover:border-indigo-600"
+          className="flex cursor-grab items-center gap-3 rounded-lg border border-edge bg-surface px-4 py-2.5 text-sm font-medium text-content shadow-sm hover:border-brand-300 active:cursor-grabbing dark:hover:border-brand-600"
         >
           <span className="text-muted">⠿</span>
           {item}

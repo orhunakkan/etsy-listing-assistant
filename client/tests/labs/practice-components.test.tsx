@@ -398,7 +398,7 @@ describe('DragAndDrop', () => {
 
     const dropZone = screen.getByTestId('drop-zone');
     fireEvent.dragOver(dropZone);
-    expect(dropZone.className).toContain('border-indigo-400');
+    expect(dropZone.className).toContain('border-brand-400');
 
     fireEvent.dragLeave(dropZone);
     expect(dropZone.className).toContain('border-edge');

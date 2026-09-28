@@ -21,7 +21,7 @@ function ActivityScore() {
         Activity Score
       </p>
       <p
-        className="mt-1 text-3xl font-bold text-indigo-600"
+        className="mt-1 text-3xl font-bold text-brand-600"
         aria-label="Activity score value"
         data-testid="activity-score"
       >
@@ -101,7 +101,7 @@ function NotificationsWidget() {
       </p>
       <p
         aria-label="Notification count"
-        className="mt-1 text-3xl font-bold text-rose-500"
+        className="mt-1 text-3xl font-bold text-rose-700"
         data-testid="notification-count"
       >
         {count}

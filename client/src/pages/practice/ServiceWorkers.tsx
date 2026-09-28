@@ -63,7 +63,7 @@ export function ServiceWorkers() {
           <button
             type="button"
             onClick={() => void registerSW()}
-            className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+            className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
           >
             Register service worker
           </button>
@@ -77,7 +77,7 @@ export function ServiceWorkers() {
             </p>
           )}
           {swRegistered === false && (
-            <p role="alert" className="mt-2 text-sm text-red-600 dark:text-red-400">
+            <p role="alert" className="mt-2 text-sm text-red-700 dark:text-red-400">
               ✗ Registration failed (not supported or already registered)
             </p>
           )}
@@ -111,13 +111,13 @@ export function ServiceWorkers() {
               aria-label="Loading"
               className="mt-3 flex items-center gap-2 text-sm text-muted"
             >
-              <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-edge border-t-indigo-600" />
+              <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-edge border-t-brand-600" />
               Loading…
             </div>
           )}
 
           {error && (
-            <p role="alert" className="mt-3 text-sm text-red-600 dark:text-red-400">
+            <p role="alert" className="mt-3 text-sm text-red-700 dark:text-red-400">
               {error}
             </p>
           )}
@@ -151,26 +151,26 @@ export function ServiceWorkers() {
           <h2 id="block-heading" className="mb-1 text-base font-semibold text-content">
             Step 3 — Block the service worker
           </h2>
-          <div className="rounded-xl border border-indigo-100 bg-indigo-50 p-4 text-sm text-indigo-800 dark:border-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
+          <div className="rounded-xl border border-brand-100 bg-brand-50 p-4 text-sm text-brand-800 dark:border-brand-700 dark:bg-brand-950 dark:text-brand-300">
             <p>
               In your Playwright test, pass{' '}
-              <code className="rounded bg-indigo-100 px-1 text-xs dark:bg-indigo-900">
+              <code className="rounded bg-brand-100 px-1 text-xs dark:bg-brand-900">
                 serviceWorkers: &apos;block&apos;
               </code>{' '}
               when creating the context:
             </p>
-            <pre className="mt-2 overflow-x-auto rounded-lg bg-indigo-900 p-3 text-xs text-indigo-100">
+            <pre className="mt-2 overflow-x-auto rounded-lg bg-brand-900 p-3 text-xs text-brand-100">
               {`const context = await browser.newContext({
   serviceWorkers: 'block',
 });`}
             </pre>
             <p className="mt-3">
               Now{' '}
-              <code className="rounded bg-indigo-100 px-1 text-xs dark:bg-indigo-900">
+              <code className="rounded bg-brand-100 px-1 text-xs dark:bg-brand-900">
                 page.route()
               </code>{' '}
               will intercept{' '}
-              <code className="rounded bg-indigo-100 px-1 text-xs dark:bg-indigo-900">
+              <code className="rounded bg-brand-100 px-1 text-xs dark:bg-brand-900">
                 /api/sw-items
               </code>{' '}
               as expected, and you can mock or verify the real server response.

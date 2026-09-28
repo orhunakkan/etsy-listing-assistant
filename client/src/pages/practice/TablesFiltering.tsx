@@ -332,7 +332,7 @@ export function TablesFiltering() {
               setPage(1);
             }}
             placeholder="Name or role…"
-            className="rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
           />
         </div>
 
@@ -347,7 +347,7 @@ export function TablesFiltering() {
               setDept(e.target.value);
               setPage(1);
             }}
-            className="rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
           >
             {DEPARTMENTS.map((d) => (
               <option key={d} value={d}>
@@ -476,7 +476,7 @@ export function TablesFiltering() {
                           type="button"
                           role="menuitem"
                           onClick={() => handleDelete(emp.id)}
-                          className="block w-full px-3 py-2 text-left text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950"
+                          className="block w-full px-3 py-2 text-left text-sm text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950"
                         >
                           Remove
                         </button>
@@ -516,7 +516,7 @@ export function TablesFiltering() {
               className={[
                 'rounded-lg border px-3 py-1.5 text-sm',
                 n === page
-                  ? 'border-indigo-500 bg-indigo-600 text-white'
+                  ? 'border-brand-500 bg-brand-600 text-white'
                   : 'border-edge text-muted hover:bg-canvas',
               ].join(' ')}
             >

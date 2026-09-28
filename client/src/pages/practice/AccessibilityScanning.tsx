@@ -66,7 +66,7 @@ function AccessibleForm() {
         <input
           id="name-accessible"
           type="text"
-          className="w-full rounded border border-edge bg-canvas px-3 py-2 text-sm text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full rounded border border-edge bg-canvas px-3 py-2 text-sm text-content focus:outline-none focus:ring-2 focus:ring-brand-500"
         />
       </div>
 
@@ -78,14 +78,14 @@ function AccessibleForm() {
         <input
           id="email-accessible"
           type="email"
-          className="w-full rounded border border-edge bg-canvas px-3 py-2 text-sm text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full rounded border border-edge bg-canvas px-3 py-2 text-sm text-content focus:outline-none focus:ring-2 focus:ring-brand-500"
         />
       </div>
 
       {/* Fixed 2: sufficient contrast */}
       <button
         type="button"
-        className="mb-4 rounded bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className="mb-4 rounded bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500"
       >
         Submit Form
       </button>
@@ -116,7 +116,7 @@ export function AccessibilityScanning() {
             type="checkbox"
             checked={accessible}
             onChange={(e) => setAccessible(e.target.checked)}
-            className="h-4 w-4 rounded border-edge text-indigo-600 focus:ring-indigo-500"
+            className="h-4 w-4 rounded border-edge text-brand-600 focus:ring-brand-500"
             aria-label="Show accessible controls"
           />
           Show accessible controls

@@ -36,7 +36,7 @@ export function FramesContexts() {
             className={[
               'rounded-lg border px-4 py-1.5 text-sm font-medium transition-colors',
               activeChallenge === n
-                ? 'border-indigo-500 bg-indigo-700 text-white'
+                ? 'border-brand-500 bg-brand-700 text-white'
                 : 'border-edge text-muted hover:border-edge hover:bg-canvas',
             ].join(' ')}
           >

@@ -100,7 +100,7 @@ function AboutAuthorButton() {
         onClick={() => setIsOpen((open) => !open)}
         aria-expanded={isOpen}
         aria-haspopup="dialog"
-        className="rounded-lg px-2.5 py-1.5 text-sm text-muted hover:text-content transition-colors"
+        className="rounded-full px-2.5 py-2 text-sm font-medium text-muted hover:text-content transition-colors sm:px-4"
       >
         About the Author
       </button>
@@ -109,7 +109,7 @@ function AboutAuthorButton() {
         <div
           role="dialog"
           aria-label="About the author"
-          className="absolute right-0 top-full z-20 mt-2 w-[34rem] rounded-xl border border-edge bg-surface p-5 shadow-lg"
+          className="absolute right-0 top-full z-20 mt-3 w-[34rem] max-w-[calc(100vw-2rem)] rounded-md border border-edge bg-surface p-6 shadow-xl"
         >
           <div className="flex items-start gap-4">
             <img
@@ -118,7 +118,7 @@ function AboutAuthorButton() {
               className="h-14 w-14 rounded-full object-cover flex-shrink-0 ring-2 ring-edge"
             />
             <div>
-              <p className="font-semibold text-content">Orhun Akkan</p>
+              <p className="font-display text-2xl leading-tight text-content">Orhun Akkan</p>
               <p className="text-sm text-muted mb-2">
                 Senior QA Engineer · 8+ years in test automation
               </p>
@@ -179,38 +179,50 @@ export function Shell() {
   return (
     <div className="min-h-screen bg-canvas text-content">
       <header className="sticky top-0 z-10 border-b border-edge bg-surface/90 backdrop-blur-sm">
-        <div className="mx-auto flex h-14 max-w-screen-2xl items-center justify-between px-4 sm:px-6">
-          <Link
-            to="/"
-            className="flex items-center gap-2 font-semibold tracking-tight text-content hover:text-accent transition-colors"
-          >
-            <svg
-              aria-hidden="true"
-              className="h-5 w-5 text-accent"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
+        <div className="mx-auto flex h-16 max-w-screen-2xl items-center justify-between gap-2 px-4 sm:px-6 lg:px-10">
+          <div className="flex min-w-0 items-center gap-3 sm:gap-5">
+            <Link
+              to="/"
+              className="flex items-center gap-2.5 text-content hover:text-accent transition-colors"
             >
-              <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5" />
-              <line x1="12" y1="22" x2="12" y2="15.5" />
-              <polyline points="22 8.5 12 15.5 2 8.5" />
-            </svg>
-            Stagecraft
-          </Link>
+              <svg
+                aria-hidden="true"
+                className="h-6 w-6 shrink-0 text-accent sm:h-7 sm:w-7"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+              >
+                <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5" />
+                <line x1="12" y1="22" x2="12" y2="15.5" />
+                <polyline points="22 8.5 12 15.5 2 8.5" />
+              </svg>
+              <span className="font-display text-2xl leading-none tracking-tight sm:text-[28px]">
+                Stagecraft
+              </span>
+            </Link>
 
-          <div className="flex items-center gap-2">
             {!isHome && (
-              <Link to="/" className="text-sm text-muted hover:text-content transition-colors">
-                ← All labs
-              </Link>
+              <>
+                <span aria-hidden="true" className="hidden h-6 w-px bg-edge sm:block" />
+                <Link
+                  to="/"
+                  className="rounded-full px-2 py-2 text-sm font-medium text-muted hover:text-content transition-colors sm:px-0"
+                >
+                  ←<span className="sr-only sm:not-sr-only"> All labs</span>
+                </Link>
+              </>
             )}
+          </div>
+
+          <div className="flex shrink-0 items-center gap-1 sm:gap-2">
             <AboutAuthorButton />
             <button
               type="button"
               onClick={() => setIsDark((d) => !d)}
               aria-label="Toggle dark mode"
-              className="rounded-lg p-1.5 text-muted hover:text-content transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-edge text-content hover:border-accent hover:text-accent transition-colors"
             >
               {isDark ? <SunIcon /> : <MoonIcon />}
             </button>
@@ -218,7 +230,7 @@ export function Shell() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 lg:py-12">
+      <main className="mx-auto max-w-screen-2xl px-4 py-10 sm:px-6 lg:px-10 lg:py-16">
         <Outlet />
       </main>
     </div>

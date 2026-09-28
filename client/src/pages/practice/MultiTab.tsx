@@ -28,7 +28,7 @@ export function MultiTab() {
           <button
             type="button"
             onClick={openDashboard}
-            className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+            className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
           >
             Open dashboard in new tab
           </button>
@@ -45,7 +45,7 @@ export function MultiTab() {
           <button
             type="button"
             onClick={openPopup}
-            className="rounded-lg border border-indigo-300 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-50 dark:border-indigo-600 dark:text-indigo-300 dark:hover:bg-indigo-950"
+            className="rounded-lg border border-brand-300 px-4 py-2 text-sm font-medium text-brand-700 hover:bg-brand-50 dark:border-brand-600 dark:text-brand-300 dark:hover:bg-brand-950"
           >
             Open popup window
           </button>
@@ -81,7 +81,7 @@ export function MultiTab() {
             <button
               type="button"
               onClick={() => window.location.reload()}
-              className="mt-2 text-xs text-accent underline hover:text-indigo-800 dark:hover:text-indigo-300"
+              className="mt-2 text-xs text-accent underline hover:text-brand-800 dark:hover:text-brand-300"
             >
               Reload to refresh value
             </button>

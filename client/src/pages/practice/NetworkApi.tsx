@@ -80,12 +80,12 @@ export function NetworkApi() {
           value={newText}
           onChange={(e) => setNewText(e.target.value)}
           placeholder="Add a note…"
-          className="flex-1 rounded-lg border border-edge px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          className="flex-1 rounded-lg border border-edge px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
         />
         <button
           type="submit"
           disabled={!newText.trim() || adding}
-          className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {adding ? 'Adding…' : 'Add'}
         </button>
@@ -120,7 +120,7 @@ export function NetworkApi() {
                 type="button"
                 onClick={() => void deleteNote(note.id)}
                 aria-label={`Delete note: ${note.text}`}
-                className="ml-3 shrink-0 rounded p-1 text-muted transition-colors hover:bg-red-50 dark:hover:bg-red-950 hover:text-red-600 dark:hover:text-red-400"
+                className="ml-3 shrink-0 rounded p-1 text-muted transition-colors hover:bg-red-50 dark:hover:bg-red-950 hover:text-red-800 dark:hover:text-red-400"
               >
                 ✕
               </button>

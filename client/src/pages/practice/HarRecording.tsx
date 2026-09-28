@@ -63,7 +63,7 @@ export function HarRecording() {
               },
             ].map(({ n, text }) => (
               <li key={n} className="flex gap-3 rounded-xl border border-edge bg-surface p-4">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-100 text-xs font-bold text-brand-700 dark:bg-brand-900 dark:text-brand-300">
                   {n}
                 </span>
                 <p className="text-sm text-muted">{text}</p>
@@ -110,7 +110,7 @@ export function HarRecording() {
               aria-label="Loading products"
               className="flex items-center gap-2 text-sm text-muted"
             >
-              <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-edge border-t-indigo-600" />
+              <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-edge border-t-brand-600" />
               Loading…
             </div>
           )}

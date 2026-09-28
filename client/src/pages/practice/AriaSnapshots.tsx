@@ -122,7 +122,7 @@ export function AriaSnapshots() {
                     className={[
                       'rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors',
                       i === step
-                        ? 'border-indigo-500 bg-indigo-700 text-white'
+                        ? 'border-brand-500 bg-brand-700 text-white'
                         : i < step
                           ? 'border-emerald-300 bg-emerald-50 text-emerald-800 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-300'
                           : 'border-edge text-muted',
@@ -150,7 +150,7 @@ export function AriaSnapshots() {
                   <input
                     type="email"
                     aria-label="Email address"
-                    className="mt-1 block w-full rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none"
+                    className="mt-1 block w-full rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-brand-500 focus:outline-none"
                     placeholder="you@example.com"
                   />
                 </label>
@@ -163,7 +163,7 @@ export function AriaSnapshots() {
                   <input
                     type="text"
                     aria-label="Display name"
-                    className="mt-1 block w-full rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none"
+                    className="mt-1 block w-full rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-brand-500 focus:outline-none"
                     placeholder="Your name"
                   />
                 </label>
@@ -200,7 +200,7 @@ export function AriaSnapshots() {
                 type="button"
                 onClick={() => setStep((s) => Math.min(STEPS.length - 1, s + 1))}
                 disabled={step === STEPS.length - 1}
-                className="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-indigo-700 disabled:opacity-40"
+                className="rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-brand-700 disabled:opacity-40"
               >
                 Next
               </button>

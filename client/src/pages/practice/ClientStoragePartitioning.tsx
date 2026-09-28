@@ -70,7 +70,7 @@ export function ClientStoragePartitioning() {
             value={draftNote}
             onChange={(e) => updateDraftNote(e.target.value)}
             rows={3}
-            className="mt-2 w-full rounded-lg border border-edge bg-canvas p-2 text-sm text-content focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="mt-2 w-full rounded-lg border border-edge bg-canvas p-2 text-sm text-content focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
           />
         </section>
 

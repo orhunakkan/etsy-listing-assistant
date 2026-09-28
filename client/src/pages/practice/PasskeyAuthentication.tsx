@@ -147,7 +147,7 @@ export function PasskeyAuthentication() {
           </p>
 
           {error && (
-            <p role="alert" className="mt-3 text-sm text-red-600 dark:text-red-400">
+            <p role="alert" className="mt-3 text-sm text-red-700 dark:text-red-400">
               {error}
             </p>
           )}
@@ -157,7 +157,7 @@ export function PasskeyAuthentication() {
               type="button"
               onClick={() => void registerPasskey()}
               disabled={busy}
-              className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+              className="w-full rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {busy ? 'Working…' : 'Register passkey'}
             </button>

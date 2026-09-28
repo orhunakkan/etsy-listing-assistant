@@ -50,24 +50,24 @@ export function InitScripts() {
           role="dialog"
           aria-labelledby="onboarding-title"
           aria-modal="true"
-          className="rounded-lg border border-indigo-300 bg-indigo-50 p-6 shadow-md"
+          className="rounded-lg border border-brand-300 bg-brand-50 p-6 shadow-md"
         >
-          <h2 id="onboarding-title" className="text-lg font-semibold text-indigo-800">
+          <h2 id="onboarding-title" className="text-lg font-semibold text-brand-800">
             Welcome to Init Scripts!
           </h2>
-          <p className="mt-2 text-sm text-indigo-700">
+          <p className="mt-2 text-sm text-brand-700">
             This onboarding modal appears when{' '}
-            <code className="rounded bg-indigo-100 px-1 font-mono text-xs">
+            <code className="rounded bg-brand-100 px-1 font-mono text-xs">
               localStorage.onboarded
             </code>{' '}
             is not set. Use{' '}
-            <code className="rounded bg-indigo-100 px-1 font-mono text-xs">page.addInitScript</code>{' '}
+            <code className="rounded bg-brand-100 px-1 font-mono text-xs">page.addInitScript</code>{' '}
             to seed it before the page loads.
           </p>
           <button
             type="button"
             onClick={dismissOnboarding}
-            className="mt-4 rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+            className="mt-4 rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
           >
             Got it — Don't show again
           </button>
@@ -135,7 +135,7 @@ export function InitScripts() {
           for a deterministic result.
         </p>
         <p
-          className="mt-4 text-4xl font-bold text-indigo-600"
+          className="mt-4 text-4xl font-bold text-brand-600 dark:text-brand-400"
           aria-label="Lucky number"
           data-testid="lucky-number"
         >
@@ -162,7 +162,13 @@ export function InitScripts() {
         </p>
         <p className="mt-3 text-sm text-content" aria-label="Onboarding state">
           Status:{' '}
-          <strong className={onboarded ? 'text-emerald-700' : 'text-rose-600'}>
+          <strong
+            className={
+              onboarded
+                ? 'text-emerald-700 dark:text-emerald-400'
+                : 'text-rose-700 dark:text-rose-400'
+            }
+          >
             {onboarded ? 'Complete' : 'Pending'}
           </strong>
         </p>

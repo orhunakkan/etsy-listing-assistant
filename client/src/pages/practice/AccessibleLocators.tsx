@@ -86,7 +86,7 @@ export function AccessibleLocators() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Title or author…"
-            className="rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
           />
         </div>
 
@@ -98,7 +98,7 @@ export function AccessibleLocators() {
             id="genre-select"
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
-            className="rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="rounded-lg border border-edge px-3 py-1.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
           >
             {GENRES.map((g) => (
               <option key={g} value={g}>
@@ -121,7 +121,7 @@ export function AccessibleLocators() {
         <p
           role="alert"
           aria-live="polite"
-          className="mb-4 rounded-lg bg-indigo-50 px-3 py-2 text-sm text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300"
+          className="mb-4 rounded-lg bg-brand-50 px-3 py-2 text-sm text-brand-700 dark:bg-brand-950 dark:text-brand-300"
         >
           {wishlist.length} {wishlist.length === 1 ? 'book' : 'books'} in your wishlist
         </p>
@@ -171,7 +171,7 @@ export function AccessibleLocators() {
                     className={[
                       'rounded-lg px-3 py-1.5 text-xs font-medium transition-colors',
                       wishlist.includes(book.id)
-                        ? 'bg-indigo-600 text-white'
+                        ? 'bg-brand-600 text-white'
                         : 'border border-edge text-muted hover:bg-canvas',
                     ].join(' ')}
                   >

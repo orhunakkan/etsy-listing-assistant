@@ -4,14 +4,17 @@ import { labs } from '../../labs';
 const lab = labs.find((l) => l.slug === 'visual-regression')!;
 
 const BUTTONS = [
-  { label: 'Primary', className: 'bg-indigo-600 text-white hover:bg-indigo-700' },
+  { label: 'Primary', className: 'bg-brand-600 text-white hover:bg-brand-700' },
   {
     label: 'Secondary',
     className:
       'border border-zinc-300 dark:border-edge text-zinc-700 dark:text-muted hover:bg-zinc-50 dark:hover:bg-canvas',
   },
   { label: 'Danger', className: 'bg-red-600 text-white hover:bg-red-700' },
-  { label: 'Ghost', className: 'text-indigo-700 hover:bg-indigo-50' },
+  {
+    label: 'Ghost',
+    className: 'text-brand-700 hover:bg-brand-50 dark:text-brand-300 dark:hover:bg-brand-950',
+  },
   {
     label: 'Disabled',
     className:
@@ -94,7 +97,7 @@ export function VisualRegression() {
                 <p className="text-xs uppercase tracking-wider text-muted">{title}</p>
                 <p className="mt-1 text-2xl font-bold text-content">{value}</p>
                 <p
-                  className={`mt-0.5 text-xs font-medium ${up ? 'text-emerald-800' : 'text-red-700'}`}
+                  className={`mt-0.5 text-xs font-medium ${up ? 'text-emerald-800 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}`}
                 >
                   {change} vs last week
                 </p>
@@ -136,7 +139,7 @@ export function VisualRegression() {
                   className="flex flex-1 flex-col items-center gap-1"
                   aria-label={`${CHART_DAYS[i]}: ${pct} sessions`}
                 >
-                  <div className="w-full rounded-t bg-indigo-500" style={{ height: `${pct}%` }} />
+                  <div className="w-full rounded-t bg-brand-500" style={{ height: `${pct}%` }} />
                   <span className="text-xs text-muted">{CHART_DAYS[i]}</span>
                 </div>
               ))}
@@ -149,14 +152,14 @@ export function VisualRegression() {
           <h2 id="aria-note-heading" className="mb-1 text-base font-semibold text-content">
             Visual vs ARIA snapshot
           </h2>
-          <div className="rounded-xl border border-indigo-100 bg-indigo-50 p-4 text-sm text-indigo-800 dark:border-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
+          <div className="rounded-xl border border-brand-100 bg-brand-50 p-4 text-sm text-brand-800 dark:border-brand-700 dark:bg-brand-950 dark:text-brand-300">
             <p>
               <strong>Use visual snapshots</strong> for catching pixel-level regressions (color,
               spacing, typography).
             </p>
             <p className="mt-2">
               <strong>Use ARIA snapshots</strong> (
-              <code className="rounded bg-indigo-100 px-1 text-xs dark:bg-indigo-900">
+              <code className="rounded bg-brand-100 px-1 text-xs dark:bg-brand-900">
                 toMatchAriaSnapshot
               </code>
               ) for catching structural regressions (missing headings, changed roles, lost
@@ -164,7 +167,7 @@ export function VisualRegression() {
             </p>
             <p className="mt-2">
               See{' '}
-              <code className="rounded bg-indigo-100 px-1 text-xs dark:bg-indigo-900">
+              <code className="rounded bg-brand-100 px-1 text-xs dark:bg-brand-900">
                 /practice/aria-snapshots
               </code>{' '}
               for the ARIA-focused lab.
