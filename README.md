@@ -5,6 +5,7 @@ Source for [stagecraftlabs.com](https://stagecraftlabs.com). The site currently 
 ## Requirements
 
 - Node 24 (see `.nvmrc`)
+- TypeScript 7 (currently 7.0.2). Don't add dependencies that conflict with TS 7 or don't support it.
 - npm workspaces: `client` and `server`. Install from the repo root only.
 
 ## Commands
