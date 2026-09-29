@@ -58,10 +58,10 @@ jobs:
       - name: Security audit
         run: npm audit --audit-level=high
 
-  deploy-azure:
-    name: Deploy to Azure App Service
-    runs-on: windows-latest
-    timeout-minutes: 15
+  deploy:
+    name: Deploy to Azure Static Web Apps
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: quality
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
@@ -69,89 +69,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+      - name: Validate deployment secret
+        env:
+          SWA_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+        run: |
+          if [ -z "$SWA_TOKEN" ]; then
+            echo "Missing GitHub repository secret: AZURE_STATIC_WEB_APPS_API_TOKEN" >&2
+            exit 1
+          fi
+
+      - name: Deploy static site
+        uses: Azure/static-web-apps-deploy@v1
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: npm
-          cache-dependency-path: package-lock.json
-
-      - name: Validate Azure deployment secrets
-        shell: pwsh
-        env:
-          AZURE_WEBAPP_NAME: ${{ secrets.AZURE_WEBAPP_NAME }}
-          AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        run: |
-          if ([string]::IsNullOrWhiteSpace($env:AZURE_WEBAPP_NAME)) {
-            throw "Missing GitHub repository secret: AZURE_WEBAPP_NAME"
-          }
-
-          if ([string]::IsNullOrWhiteSpace($env:AZURE_WEBAPP_PUBLISH_PROFILE)) {
-            throw "Missing GitHub repository secret: AZURE_WEBAPP_PUBLISH_PROFILE"
-          }
-
-      - name: Build Azure App Service package
-        shell: pwsh
-        run: |
-          npm run build
-          if ($LASTEXITCODE -ne 0) { throw "Build failed" }
-
-          # The app has no runtime dependencies, so the package is just the
-          # manifests plus the built server and the static client files.
-          $staging = ".azure-publish/appservice"
-          New-Item -ItemType Directory -Force -Path "$staging/client", "$staging/server" | Out-Null
-          Copy-Item package.json -Destination $staging
-          Copy-Item client/package.json, client/index.html -Destination "$staging/client"
-          Copy-Item server/package.json -Destination "$staging/server"
-          Copy-Item server/dist -Destination "$staging/server/dist" -Recurse
-          Compress-Archive -Path "$staging/*" -DestinationPath ".azure-publish/stagecraft-appservice.zip" -Force
-
-      - name: Deploy ZIP package
-        shell: pwsh
-        env:
-          AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        run: |
-          $packagePath = ".azure-publish/stagecraft-appservice.zip"
-          if (-not (Test-Path -LiteralPath $packagePath)) {
-            throw "Deployment package was not found: $packagePath"
-          }
-
-          [xml]$publishProfile = $env:AZURE_WEBAPP_PUBLISH_PROFILE
-          $profile = $publishProfile.publishData.publishProfile |
-            Where-Object { $_.publishMethod -eq "ZipDeploy" } |
-            Select-Object -First 1
-
-          if (-not $profile) {
-            throw "Publish profile does not contain ZipDeploy credentials."
-          }
-
-          $credentials = "$($profile.userName):$($profile.userPWD)"
-          $encodedCredentials = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($credentials))
-          $headers = @{ Authorization = "Basic $encodedCredentials" }
-          $deployUri = "https://$($profile.publishUrl.TrimEnd('/'))/api/zipdeploy?isAsync=true"
-
-          Write-Host "Uploading deployment ZIP to Azure App Service..."
-          $response = Invoke-WebRequest `
-            -Method Post `
-            -Uri $deployUri `
-            -Headers $headers `
-            -InFile $packagePath `
-            -ContentType "application/zip"
-
-          $statusUri = @($response.Headers.Location)[0]
-          if (-not $statusUri) {
-            Write-Host "Azure accepted the deployment request."
-            return
-          }
-
-          do {
-            Start-Sleep -Seconds 5
-            $status = Invoke-RestMethod -Method Get -Uri $statusUri -Headers $headers
-            Write-Host "Deployment status: $($status.status_text)"
-          } while ($status.status -lt 3)
-
-          if ($status.status -ne 4) {
-            throw "Azure deployment failed: $($status.status_text)"
-          }
-
-          Write-Host "Azure deployment completed."
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          action: upload
+          app_location: client/public
+          skip_app_build: true
+          skip_api_build: true

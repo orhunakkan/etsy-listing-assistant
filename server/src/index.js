@@ -5,7 +5,7 @@ const PORT = Number(process.env.PORT ?? 3001);
 const isProduction = process.env.NODE_ENV === 'production';
 
 // Resolves from both server/src (dev) and server/dist (production).
-const page = readFileSync(new URL('../../client/index.html', import.meta.url));
+const page = readFileSync(new URL('../../client/public/index.html', import.meta.url));
 
 const securityHeaders = {
   'Content-Security-Policy':
