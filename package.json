@@ -1,10 +1,9 @@
 {
   "name": "stagecraft",
-  "version": "1.0.0",
-  "description": "Advanced playground for Playwright testing framework",
+  "version": "0.0.0",
+  "private": true,
   "license": "ISC",
   "author": "Orhun Akkan",
-  "private": true,
   "engines": {
     "node": "24.x"
   },
@@ -13,48 +12,13 @@
     "server"
   ],
   "scripts": {
-    "dev": "concurrently -n client,server -c cyan,yellow \"npm run dev --workspace=client\" \"npm run dev --workspace=server\"",
-    "dev:client": "npm run dev --workspace=client",
-    "dev:server": "npm run dev --workspace=server",
-    "build": "npm run build --workspace=client && npm run build --workspace=server",
-    "test": "npm run test --workspace=client && npm run test --workspace=server",
-    "test:run": "npm run test:run --workspace=client && npm run test:run --workspace=server",
-    "test:coverage": "npm run test:coverage --workspace=client && npm run test:coverage --workspace=server",
-    "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
-    "lint": "eslint client/src server/src e2e",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "package:azure": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package-azure-app-service.ps1",
+    "dev": "npm run dev --workspace=server",
+    "build": "npm run build --workspaces --if-present",
     "start": "node server/dist/index.js",
-    "typecheck": "tsc --noEmit && npm run typecheck --workspace=client && npm run typecheck --workspace=server",
-    "prepare": "husky || true"
-  },
-  "overrides": {
-    "shell-quote": "^1.10.0"
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.{json,md,yml,yaml}": [
-      "prettier --write"
-    ]
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.11.3",
-    "@playwright/test": "^1.60.0",
-    "@types/node": "^25.9.1",
-    "@vitest/coverage-v8": "^4.1.7",
-    "concurrently": "^10.0.3",
-    "eslint": "^10.8.0",
-    "eslint-plugin-import-x": "^4.16.2",
-    "eslint-plugin-jsx-a11y": "6.4.1",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.0.5",
-    "prettier": "3.8.3",
-    "typescript-eslint": "^8.59.4"
+    "prettier": "3.8.3"
   }
 }

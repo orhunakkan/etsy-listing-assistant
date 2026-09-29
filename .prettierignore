@@ -1,15 +1,4 @@
 node_modules/
 dist/
-coverage/
-
-client/dist/
-client/coverage/
-server/dist/
-server/coverage/
-
-playwright-report/
-test-results/
-
-*.tsbuildinfo
-*.local
-.env
+.azure-publish/
+package-lock.json
