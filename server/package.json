@@ -1,11 +1,1 @@
-{
-  "name": "@stagecraft/server",
-  "version": "0.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "dev": "node --watch src/index.js",
-    "build": "node -e \"fs.rmSync('dist',{recursive:true,force:true});fs.cpSync('src','dist',{recursive:true})\"",
-    "start": "node dist/index.js"
-  }
-}
+{}

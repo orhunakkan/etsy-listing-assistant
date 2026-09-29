@@ -1,5 +1,5 @@
 {
-  "name": "stagecraft",
+  "name": "stagecraftlabs",
   "version": "0.0.0",
   "private": true,
   "license": "ISC",
@@ -11,14 +11,6 @@
     "client",
     "server"
   ],
-  "scripts": {
-    "dev": "npm run dev --workspace=server",
-    "build": "npm run build --workspaces --if-present",
-    "start": "node server/dist/index.js",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
-  },
-  "devDependencies": {
-    "prettier": "3.8.3"
-  }
+  "scripts": {},
+  "devDependencies": {}
 }
