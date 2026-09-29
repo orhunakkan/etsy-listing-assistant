@@ -1,1 +1,16 @@
-{}
+{
+  "name": "@stagecraft/server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "jev:check": "node --env-file-if-exists=../.env src/jev-check.ts"
+  },
+  "dependencies": {
+    "@typesafe-ai/sdk": "0.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.0"
+  }
+}

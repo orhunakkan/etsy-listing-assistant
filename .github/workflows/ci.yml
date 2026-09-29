@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Skip
-        run: echo "CI is disabled. Run npm run check locally."
+        run: echo "CI is disabled. Run npm run typecheck locally."
