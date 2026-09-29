@@ -1,6 +1,6 @@
 # Stagecraft Labs
 
-Source for [stagecraftlabs.com](https://stagecraftlabs.com). The site currently serves a placeholder page while the next app is built.
+Local-only for now: a placeholder page while the next app is built. Nothing is deployed.
 
 ## Requirements
 
@@ -20,9 +20,9 @@ Source for [stagecraftlabs.com](https://stagecraftlabs.com). The site currently 
 
 ## Layout
 
-- `client/public/` is what gets deployed: the placeholder page plus `staticwebapp.config.json` (security headers and 404 handling).
-- `server/src/index.js` is a dependency-free Node HTTP server for local development. It serves the same page with the same headers and exposes `/health` and `/ready`.
+- `client/public/index.html` is the placeholder page.
+- `server/src/index.js` is a dependency-free Node HTTP server. It serves the page with security headers and exposes `/health` and `/ready`.
 
-## Deployment
+## CI
 
-The site is hosted on Azure Static Web Apps (Free plan). Every push to `main` runs the CI quality gates (format check, build, smoke test, `npm audit`) and then uploads `client/public/` to the Static Web App. The deploy job needs the `AZURE_STATIC_WEB_APPS_API_TOKEN` repository secret.
+Every push and pull request to `main` runs the quality gates: format check, build, smoke test and `npm audit`. CI deploys nothing.

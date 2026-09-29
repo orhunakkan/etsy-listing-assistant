@@ -1,4 +1,3 @@
 node_modules/
 dist/
-.azure-publish/
 package-lock.json

@@ -2,9 +2,8 @@ import { createServer } from 'node:http';
 import { readFileSync } from 'node:fs';
 
 const PORT = Number(process.env.PORT ?? 3001);
-const isProduction = process.env.NODE_ENV === 'production';
 
-// Resolves from both server/src (dev) and server/dist (production).
+// Resolves from both server/src (dev) and server/dist (built).
 const page = readFileSync(new URL('../../client/public/index.html', import.meta.url));
 
 const securityHeaders = {
@@ -13,7 +12,6 @@ const securityHeaders = {
   'Referrer-Policy': 'no-referrer',
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
-  ...(isProduction && { 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains' }),
 };
 
 const server = createServer((req, res) => {
