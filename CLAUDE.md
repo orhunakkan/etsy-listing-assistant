@@ -1,4 +1,4 @@
-# Stagecraft Labs
+# Nameless Project
 
 Local-only Node 24 repo with npm workspaces `client` and `server`, built by Claude Code. Install from the repo root only.
 

@@ -14,7 +14,7 @@ const THRESHOLD = 0.5; // minimum probability of yes for a skill to be picked
 const MAX_PICKS = 3;
 const MAX_PROMPT_CHARS = 12_000; // keeps state + longest question well under Jev's 32k-token limit
 const REPOSITORY =
-  'stagecraftlabs: an early-stage TypeScript 7 / Node 24 npm-workspaces repo (client and server), built by Claude Code.';
+  'nameless-project: an early-stage TypeScript 7 / Node 24 npm-workspaces repo (client and server), built by Claude Code.';
 
 interface HookInput {
   prompt?: string;
