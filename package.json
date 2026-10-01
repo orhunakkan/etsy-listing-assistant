@@ -12,7 +12,7 @@
     "server"
   ],
   "scripts": {
-    "typecheck": "npm run typecheck --workspaces --if-present && tsc -p .claude/hooks",
+    "typecheck": "npm run typecheck --workspaces --if-present && tsc -p .claude/hooks && tsc -p scripts",
     "test": "npm test --workspaces --if-present",
     "jev:check": "npm run jev:check --workspace=server",
     "etsy:check": "npm run etsy:check --workspace=server",

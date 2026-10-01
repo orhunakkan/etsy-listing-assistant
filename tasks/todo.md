@@ -86,7 +86,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
     - adopts a matching draft on a retry after a crash
   - **Verify:** fake-fetch tests kill the push before the id is saved, after `image:3` and before inventory. Each retry ends with exactly one create and each image once.
   - **Files:** `server/src/publisher/publish.ts`, `server/src/publisher/publish.test.ts`, `server/src/etsy/listings.ts`
-- [ ] **T9: Live sample draft**
+- [x] **T9: Live sample draft** (done 2026-10-01; draft 4586418920 created and read back. Etsy enforced 3 rules the OpenAPI schema does not show: calculated shipping needs item weight and dimensions, `property_name` is required, and `*_on_property` arrays must be empty or name both properties once one does. All are recorded in SPEC.md and fixed in T7/T8 code. The custom-color form is still untried)
   - **Acceptance:** `scripts/publish-sample.mts` creates one draft. It has fixed harmless text, 2 sample images, sizes S/M × colors Black/White at placeholder prices, and the first processing, shipping and return profiles from reference data. It then reads the listing back and prints it.
   - **Verify:** run it once. Record in SPEC.md any field rule Etsy enforces differently.
   - **Files:** `scripts/publish-sample.mts`, `scripts/tsconfig.json`, `package.json` (typecheck wiring), `SPEC.md` (only if facts changed)
@@ -100,7 +100,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
   - **Files:** `server/src/guard/rules.ts`, `server/src/guard/rules.test.ts`
 - [ ] **T11: Settings API**
   - **Acceptance:**
-    - `GET`/`PUT /api/settings` covers the full settings: sizes, colors with Etsy value mapping, price per size, quantity, SKU pattern, listing defaults (profile ids), materials, footer, voice and banned terms. It is checked with a zod schema and with `rules.ts`.
+    - `GET`/`PUT /api/settings` covers the full settings: sizes, colors with Etsy value mapping, price per size, quantity, SKU pattern, packed weight and dimensions (needed by calculated shipping, found in T9), listing defaults (profile ids), materials, footer, voice and banned terms. It is checked with a zod schema and with `rules.ts`.
     - `GET /api/reference` serves the cached reference data.
   - **Verify:** tests for schema validation and for rule errors in the footer and colors.
   - **Files:** `server/src/settings/settings.ts`, `server/src/settings/routes.ts`, `server/src/settings/settings.test.ts`, `server/src/index.ts`
@@ -127,7 +127,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
     - Server validation errors appear next to their fields.
   - **Verify:** browser pass, then save and reload.
   - **Files:** `client/src/pages/Settings.tsx`, `client/src/api.ts`, `client/src/App.tsx`
-- [ ] **CHECKPOINT D:** you enter your real product details in Settings. **Needs your sizes, colors, prices, quantity, SKU format and footer.**
+- [ ] **CHECKPOINT D:** you enter your real product details in Settings. **Needs your sizes, colors, prices, quantity, SKU format, packed weight and dimensions, and footer.**
 
 ## Phase 4: batch-review
 

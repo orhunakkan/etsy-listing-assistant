@@ -86,6 +86,8 @@ Checked 2026-10-01 against the live OpenAPI spec and developers.etsy.com. **(unv
   - `shipping_profile_id`: a forum post says drafts stopped requiring it on 2026-01-29, but the OpenAPI text still says it is required for physical listings. The app always sends it, so the conflict doesn't matter.
   - The T-shirt `taxonomy_id` is looked up at runtime via `getSellerTaxonomyNodes`, never hard-coded.
   - Sending the old `is_personalizable` fields returns an error.
+  - **Calculated shipping needs the item's size (seen live 2026-10-01, T9).** The shop's shipping profile is calculated, and Etsy refuses it with HTTP 400 unless the listing has all of `item_weight`, `item_weight_unit`, `item_length`, `item_width`, `item_height` and `item_dimensions_unit`. So the shop settings hold a packed weight and dimensions, sent with every draft.
+  - Array fields (`tags`, `materials`) go as one comma-separated value, as the tutorial does for `image_ids`. An entry containing a comma is refused.
     - <https://developers.etsy.com/documentation/tutorials/listings>
 - **Text rules** (enforced by `listing-guard`)
   - **Title:** at most 140 characters (unverified). Allowed: letters, digits, punctuation, math symbols (`\p{Sm}`), spaces, ™©®. `%`, `:`, `&` and `+` may each appear at most once. Copy the regex from the OpenAPI spec; don't rewrite it by hand.
@@ -93,10 +95,15 @@ Checked 2026-10-01 against the live OpenAPI spec and developers.etsy.com. **(unv
   - **Materials:** letters, digits and spaces only.
   - **Styles:** at most 2, each at most 45 characters.
 - **Images:** `uploadListingImage` is multipart (`image`, `rank`, `overwrite`, `alt_text` up to 500 chars). With `overwrite=true`, an image replaces whatever is already at that rank, which is what makes retries safe. Up to 20 images per listing. The 20 MB file limit is unverified.
-- **Variations:** `updateListingInventory` takes JSON products. Each product has `property_values: [{property_id, value_ids, values, scale_id?}]` and `offerings: [{price, quantity, is_enabled, readiness_state_id}]`, plus the `price_on_property` / `quantity_on_property` / `sku_on_property` / `readiness_state_on_property` arrays.
+- **Variations:** `updateListingInventory` takes JSON products. Each product has `property_values: [{property_id, property_name, value_ids, values, scale_id?}]` and `offerings: [{price, quantity, is_enabled, readiness_state_id}]`, plus the `price_on_property` / `quantity_on_property` / `sku_on_property` / `readiness_state_on_property` arrays.
+  - **Rules Etsy enforces beyond the OpenAPI schema (seen live 2026-10-01, T9):**
+    - `property_name` is required (HTTP 400 "Expected string value for 'property_name'"), though the schema marks it optional.
+    - Once any `*_on_property` array names every variation property, each of the others must be empty or name every property too (HTTP 400 "Supports only zero or all 2 variation properties"). So with SKUs per size × color, `price_on_property` is `[size, color]`, even though price varies by size only.
+    - Products sharing a SKU must share a quantity (listings tutorial), so `quantity_on_property` matches `sku_on_property`.
+  - **Read-back ids differ:** `getListingInventory` returns listing-specific value ids (e.g. size S sent as `2137` came back as `61857884540`), so never compare them with the taxonomy value ids.
   - **Where ids come from:** size and color property ids, the size `scale_id`, and value ids come from `getPropertiesByTaxonomyId?supports_variations=true`. Shop setup resolves them once and stores them in the shop settings. Deprecated property ids return 400.
   - **Value strings:** values are validated (Etsy rejects some characters, such as parentheses).
-  - **Color mapping:** each shop color name maps to an Etsy color value id. A color with no Etsy match is sent as a custom value string.
+  - **Color mapping:** each shop color name maps to an Etsy color value id. A color with no Etsy match is sent as a custom value string: `value_ids: []` and the name in `values` (<https://github.com/etsy/open-api/discussions/1253>; not yet tried live: the T9 sample's Black and White both mapped).
 - **Processing profiles** became the only source of processing time on 2025-09-29.
   - <https://github.com/etsy/open-api/discussions/1472>
 - **Settings the API can't reach.** Production partners can't be created via the API, and the seller doesn't need them. The editor's "How it's made" fields can't be set via the API either.
@@ -410,7 +417,7 @@ The app creates listings directly through the Etsy API, with `who_made = i_did` 
 
 ## Open questions
 
-1. **Product template values.** Your sizes, color names and price per size. Also: the default quantity per variation, and whether you want a SKU format.
+1. **Product template values.** Your sizes, color names and price per size. Also: the default quantity per variation, whether you want a SKU format, and the packed weight and dimensions of one shirt (your calculated shipping profile needs them; see createDraftListing above).
 2. **Description footer.** Do you already have standard size-chart, care and shipping text to paste in?
 3. **Mockups.** Is each mockup one shirt color? If so, color detection can map each image to a color variation. Etsy can link photos to variations, but that isn't in the MVP.
 
