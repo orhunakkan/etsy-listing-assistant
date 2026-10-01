@@ -16,7 +16,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
     - Unit tests for the Host/Origin rules.
     - `curl -H "Origin: https://evil.example" localhost:3003/api/health` → 403.
   - **Files:** `package.json`, `server/package.json`, `server/src/app.ts`, `server/src/index.ts`, `server/src/http/serve.ts` (+ test), `server/src/http/local-only.ts` (+ test), `CLAUDE.md`
-- [ ] **T2: SQLite database and schema**
+- [x] **T2: SQLite database and schema** (done 2026-10-01; STRICT tables, timestamps in epoch ms, foreign keys with cascade from batches → items → images)
   - **Acceptance:**
     - `db.ts` opens `data/app.db` (created if missing) and applies the spec schema with `PRAGMA user_version`.
     - The single-row checks on `shop` and `settings` are enforced.
