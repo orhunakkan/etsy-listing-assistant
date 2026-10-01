@@ -5,7 +5,13 @@ Local-only Node 24 repo with npm workspaces `client` and `server`, built by Clau
 ## Commands
 
 - `npm run typecheck`: type-checks every workspace and `.claude/hooks`. Run it before finishing any change.
+- `npm test`: runs every workspace's `node:test` suite (`*.test.ts` next to the code). Run it before finishing any change.
+- `npm start --workspace=server`: starts the server on `http://localhost:3003`, bound to `127.0.0.1` only.
 - `npm run jev:check`: makes one real Jev call to confirm the API key and connection work.
+
+## Work in progress
+
+The approved spec is [SPEC.md](SPEC.md). Work follows [tasks/plan.md](tasks/plan.md), including its Workflow section (one branch per phase, commit per task, stop at checkpoints), and [tasks/todo.md](tasks/todo.md). To resume, continue with the first unchecked task.
 
 ## TypeScript 7 (strict), hard requirements
 

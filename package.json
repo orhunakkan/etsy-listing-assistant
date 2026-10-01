@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "typecheck": "npm run typecheck --workspaces --if-present && tsc -p .claude/hooks",
+    "test": "npm test --workspaces --if-present",
     "jev:check": "npm run jev:check --workspace=server"
   },
   "devDependencies": {

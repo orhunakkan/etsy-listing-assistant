@@ -6,16 +6,16 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
 
 ## Phase 0: Foundation
 
-- [ ] **T1: Server skeleton with local-only protection**
+- [x] **T1: Server skeleton with local-only protection** (done 2026-10-01; `@hono/node-server` was replaced by our own `server/src/http/serve.ts`, see SPEC Tech stack)
   - **Acceptance:**
-    - `hono` and `@hono/node-server` are installed with exact pins and pass typecheck.
+    - `hono` is installed with an exact pin and passes typecheck. The server runs through our own adapter, which has its own tests.
     - The server listens on `127.0.0.1:3003`. `GET /api/health` → `{ok:true}`.
     - The middleware rejects a foreign `Host` or `Origin` with 403 and sets the spec's security headers.
     - A root `npm test` runs `node --test` across the server workspace.
   - **Verify:**
     - Unit tests for the Host/Origin rules.
     - `curl -H "Origin: https://evil.example" localhost:3003/api/health` → 403.
-  - **Files:** `package.json`, `server/package.json`, `server/src/index.ts`, `server/src/http/local-only.ts`, `server/src/http/local-only.test.ts`, `CLAUDE.md`
+  - **Files:** `package.json`, `server/package.json`, `server/src/app.ts`, `server/src/index.ts`, `server/src/http/serve.ts` (+ test), `server/src/http/local-only.ts` (+ test), `CLAUDE.md`
 - [ ] **T2: SQLite database and schema**
   - **Acceptance:**
     - `db.ts` opens `data/app.db` (created if missing) and applies the spec schema with `PRAGMA user_version`.

@@ -82,7 +82,8 @@ At each checkpoint the agent stops and reports. Work continues only after you co
 |---|---|---|
 | Etsy rejects the inventory payload (property/scale ids, color values) | Variations can't be created, which blocks the MVP | Settled at Checkpoint C with a real draft, before any UI work. The fallback is Etsy's custom-variation property ids (513/514) for color |
 | Vite or React types fail under TS 7 with `skipLibCheck: false` | No client build | Proven in T12. Fallback: a JS `vite.config.mjs` and no `vite/client` types. If React's types fail, we stop and ask |
-| `@anthropic-ai/sdk` or `hono` types fail under TS 7 | That module is blocked | Each is installed in the task that first needs it, and checked right away. Fallback: raw `fetch` against the HTTP API, behind the same function signature |
+| `@anthropic-ai/sdk` types fail under TS 7 | Copywriter is blocked | Installed in T20 and checked right away. Fallback: raw `fetch` against the HTTP API, behind the same function signature |
+| ~~`hono` types fail~~ **Happened in T1:** `@hono/node-server` failed; `hono` passed | — | Resolved with the user: keep `hono`, serve it with our own adapter (`server/src/http/serve.ts`). See the SPEC Tech stack row |
 | `createDraftListing` field rules differ from the spec (e.g. `shipping_profile_id`, `readiness_state_id`) | Pushes fail | T9 shows the real 400 messages. The spec's facts section is updated with what Etsy actually returns |
 | Jev over-blocks generic words ("Apple", "Target") | You have to override often | The eval at Checkpoint G includes such phrases. Threshold changes are your call |
 | Claude previews too small to read printed text | Weak IP check on `design_text` | The preview size is set from the current Claude vision docs. `design_text` is verified on real mockups at Checkpoint F |

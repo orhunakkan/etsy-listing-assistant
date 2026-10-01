@@ -113,7 +113,7 @@ The pinned versions below were current on 2026-10-01. Every package is checked a
 | Concern | Choice | Why |
 |---|---|---|
 | Runtime | Node 24 (type stripping), TS 7.0.2 strict | Repo rules |
-| Server HTTP | `hono` 4.13.12 + `@hono/node-server` 2.1.3 | Small, typed, no compiler API, runs on Node now and on most hosts later |
+| Server HTTP | `hono` 4.13.12 + our own adapter (`server/src/http/serve.ts`, about 40 lines on Node's built-in `Request`/`Response`) | Small, typed, no compiler API, runs on Node now and on most hosts later. **`@hono/node-server` was rejected 2026-10-01:** its type definitions (2.x and 1.x) need browser-only types (`MessageEvent<T>`, `BinaryType`, `RequestInfo`) and fail the strict typecheck. Adding `dom` to the server's `lib` was rejected too, because server code could then use browser globals without a type error |
 | Validation / AI output schema | `zod` 4.6.5 | One schema validates API input and serves as Claude's structured-output schema |
 | Storage | `node:sqlite` (built in) + files under `data/` | No dependency. `data/` is git-ignored |
 | Claude | `@anthropic-ai/sdk` 0.131.0, model `claude-opus-5-5`, effort set explicitly (`medium` to start; the model defaults to `medium` too) | Vision + structured outputs. A `refusal` stop reason is handled. The refusal fallback uses the **beta** client: `client.beta.messages.parse` with `betas: ["server-side-fallback-2026-07-01"]` and `fallbacks: "default"`. Exact SDK calls are checked against the claude-api skill at build time |
