@@ -36,7 +36,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
 
 ## Phase 1: etsy-connect
 
-- [ ] **T4: OAuth connect**
+- [x] **T4: OAuth connect** (done 2026-10-01; routes live in `server/src/app.ts`; shop resolved via `getMe` → `getShop`; the live consent is part of Checkpoint B)
   - **Acceptance:**
     - `/oauth/start` redirects to Etsy with PKCE S256, a random `state` and the scopes `listings_r listings_w shops_r`.
     - `/oauth/redirect` checks `state` (single use, 10-minute expiry), exchanges the code, resolves the shop (user → shop) and stores the `shop` row.
