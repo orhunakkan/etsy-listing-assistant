@@ -32,7 +32,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
     - Fake-fetch tests: header, throttle spacing, 429 → retry, logging.
     - Live `npm run etsy:check`.
   - **Files:** `server/src/etsy/client.ts`, `server/src/etsy/throttle.ts`, `server/src/etsy/client.test.ts`, `server/src/etsy-check.ts`, `server/package.json` (+ `CLAUDE.md`)
-- [ ] **CHECKPOINT A:** `etsy:check` gets a 200 from Etsy with your credentials.
+- [x] **CHECKPOINT A:** `etsy:check` gets a 200 from Etsy with your credentials. (approved 2026-10-01; two logged pings, both HTTP 200)
 
 ## Phase 1: etsy-connect
 
