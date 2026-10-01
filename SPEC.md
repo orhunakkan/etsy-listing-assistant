@@ -1,6 +1,6 @@
 # Spec: Etsy Listing Assistant (MVP)
 
-Status: **draft v3, scoped to one shop, awaiting your review**. Nothing below is built yet.
+Status: **approved 2026-10-01 (v3, one shop)**. Implementation follows [tasks/plan.md](tasks/plan.md).
 
 ## Objective
 
