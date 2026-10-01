@@ -23,6 +23,18 @@ export type DraftListing = {
   shopSectionId: number | null;
   tags: readonly string[];
   materials: readonly string[];
+  itemSize: ItemSize | null; // required when the shipping profile is calculated
+};
+
+// The packed item's weight and dimensions. Etsy refuses a calculated shipping profile
+// without all six fields (HTTP 400 seen live in T9).
+export type ItemSize = {
+  weight: number;
+  weightUnit: 'oz' | 'lb' | 'g' | 'kg';
+  length: number;
+  width: number;
+  height: number;
+  dimensionsUnit: 'in' | 'ft' | 'mm' | 'cm' | 'm' | 'yd';
 };
 
 export type DraftSummary = { listingId: number; title: string; createdAt: number }; // createdAt in epoch ms
@@ -57,6 +69,15 @@ export async function createDraftListing(etsyFetch: EtsyFetch, shopId: number, l
   if (listing.shopSectionId !== null) body.set('shop_section_id', String(listing.shopSectionId));
   if (listing.tags.length > 0) body.set('tags', joinList('tags', listing.tags));
   if (listing.materials.length > 0) body.set('materials', joinList('materials', listing.materials));
+  if (listing.itemSize !== null) {
+    const { weight, weightUnit, length, width, height, dimensionsUnit } = listing.itemSize;
+    body.set('item_weight', String(weight));
+    body.set('item_weight_unit', weightUnit);
+    body.set('item_length', String(length));
+    body.set('item_width', String(width));
+    body.set('item_height', String(height));
+    body.set('item_dimensions_unit', dimensionsUnit);
+  }
 
   const res = await etsyFetch(`/v3/application/shops/${shopId}/listings`, { method: 'POST', body });
   return CreatedListing.parse(await res.json()).listing_id;

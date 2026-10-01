@@ -118,6 +118,7 @@ const listing: DraftListing = {
   shopSectionId: null,
   tags: ['sample tag', 'test draft'],
   materials: ['cotton'],
+  itemSize: { weight: 5, weightUnit: 'oz', length: 10, width: 8, height: 1, dimensionsUnit: 'in' },
 };
 const inventory: InventoryPayload = {
   products: [],
@@ -205,6 +206,12 @@ describe('publish', () => {
       readiness_state_id: '9',
       tags: 'sample tag,test draft',
       materials: 'cotton',
+      item_weight: '5',
+      item_weight_unit: 'oz',
+      item_length: '10',
+      item_width: '8',
+      item_height: '1',
+      item_dimensions_unit: 'in',
     });
     assert.deepEqual(etsy.uploads[0], { rank: '1', overwrite: 'true', altText: 'alt 1', name: '1.png' });
   });
@@ -297,6 +304,14 @@ describe('publish', () => {
     await assert.rejects(run(ITEM, content), /already being pushed/);
     await first;
     assert.equal(etsy.created.length, 1);
+  });
+
+  it('sends no weight or dimensions when the item size is null', async () => {
+    const run = createPublisher({ db, etsyFetch, shopId: SHOP, readImage: async () => new File([], 'x.png') });
+    await run(ITEM, { listing: { ...listing, itemSize: null }, inventory });
+    const sent = etsy.created[0];
+    assert.ok(sent);
+    assert.deepEqual([...sent.keys()].filter((key) => key.startsWith('item_')), []);
   });
 
   it('refuses a tag with a comma, which Etsy would split in two', async () => {
