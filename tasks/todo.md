@@ -22,7 +22,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
     - The single-row checks on `shop` and `settings` are enforced.
   - **Verify:** tests on `:memory:` check that the schema is created, that a second `shop` row is rejected, and that migration twice is a no-op.
   - **Files:** `server/src/db.ts`, `server/src/db.test.ts`
-- [ ] **T3: Etsy HTTP client, throttle and `etsy:check`**
+- [x] **T3: Etsy HTTP client, throttle and `etsy:check`** (done 2026-10-01; ping is `GET /v3/application/openapi-ping` (`ping`), base `https://api.etsy.com` as in Etsy's docs, though the OpenAPI `servers` entry says `openapi.etsy.com`; live check returned 200)
   - **Acceptance:**
     - `etsyFetch` sends `x-api-key: keystring:secret`.
     - The throttle allows at most 4 req/s and honors `retry-after` with exponential backoff.

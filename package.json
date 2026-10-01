@@ -14,7 +14,8 @@
   "scripts": {
     "typecheck": "npm run typecheck --workspaces --if-present && tsc -p .claude/hooks",
     "test": "npm test --workspaces --if-present",
-    "jev:check": "npm run jev:check --workspace=server"
+    "jev:check": "npm run jev:check --workspace=server",
+    "etsy:check": "npm run etsy:check --workspace=server"
   },
   "devDependencies": {
     "@types/node": "24.19.0",
