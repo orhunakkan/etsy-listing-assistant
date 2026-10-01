@@ -2,7 +2,15 @@
 
 Source of truth: [SPEC.md](../SPEC.md) (approved 2026-10-01). The task checklist lives in [todo.md](todo.md).
 
-Status: **awaiting your review**.
+Status: **approved 2026-10-01**.
+
+## Workflow (agreed with the user, 2026-10-01)
+
+- **One branch per phase,** cut from `main`: `feature/phase-0-foundation`, `feature/phase-1-etsy-connect`, and so on.
+- **Commit after each verified task** (`npm run typecheck` + `npm test` + the task's own check). Tick its box in [todo.md](todo.md) in the same commit. Messages follow `<type>: <description>` and end with the Co-Authored-By line.
+- **Stop at every CHECKPOINT** and report to the user. Only after they approve, fast-forward `main` to the phase branch (`git merge --ff-only`) and cut the next phase branch.
+- **Never** push, force-push or rewrite history without asking.
+- **Resuming in a new session:** read SPEC.md, this plan and todo.md. Check `git status` and the current branch. Continue with the first unchecked task.
 
 ## Approach
 
