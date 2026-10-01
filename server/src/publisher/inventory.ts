@@ -138,13 +138,16 @@ export function buildInventory(input: InventoryInput): InventoryResult {
     ...(pattern.includes('{size}') ? [input.sizePropertyId] : []),
     ...(pattern.includes('{color}') ? [input.colorPropertyId] : []),
   ];
+  // Products sharing a SKU must share a quantity (Etsy listings tutorial), so quantity
+  // varies on the SKU's properties; without SKUs it is per size × color.
+  const quantityOn = pattern === null ? [input.sizePropertyId, input.colorPropertyId] : skuOn;
 
   return {
     ok: true,
     payload: {
       products,
       price_on_property: [input.sizePropertyId],
-      quantity_on_property: [input.sizePropertyId, input.colorPropertyId],
+      quantity_on_property: quantityOn,
       sku_on_property: skuOn,
       readiness_state_on_property: [],
     },

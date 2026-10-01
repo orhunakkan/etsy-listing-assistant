@@ -85,19 +85,20 @@ describe('buildInventory', () => {
     });
   });
 
-  const skuCases: Array<{ pattern: string | null; skus: Array<string | undefined>; on: number[] }> = [
-    { pattern: '{design}-{size}-{color}', skus: ['SUNSET-TEE-S-BLACK', 'SUNSET-TEE-S-HEATHER-GREY'], on: [SIZE, COLOR] },
-    { pattern: 'PP-{size}', skus: ['PP-S', 'PP-S'], on: [SIZE] },
-    { pattern: '{color}/{design}', skus: ['BLACK/SUNSET-TEE', 'HEATHER-GREY/SUNSET-TEE'], on: [COLOR] },
-    { pattern: 'FIXED', skus: ['FIXED', 'FIXED'], on: [] },
-    { pattern: null, skus: [undefined, undefined], on: [] },
+  const skuCases: Array<{ pattern: string | null; skus: Array<string | undefined>; skuOn: number[]; quantityOn: number[] }> = [
+    { pattern: '{design}-{size}-{color}', skus: ['SUNSET-TEE-S-BLACK', 'SUNSET-TEE-S-HEATHER-GREY'], skuOn: [SIZE, COLOR], quantityOn: [SIZE, COLOR] },
+    { pattern: 'PP-{size}', skus: ['PP-S', 'PP-S'], skuOn: [SIZE], quantityOn: [SIZE] },
+    { pattern: '{color}/{design}', skus: ['BLACK/SUNSET-TEE', 'HEATHER-GREY/SUNSET-TEE'], skuOn: [COLOR], quantityOn: [COLOR] },
+    { pattern: 'FIXED', skus: ['FIXED', 'FIXED'], skuOn: [], quantityOn: [] },
+    { pattern: null, skus: [undefined, undefined], skuOn: [], quantityOn: [SIZE, COLOR] },
   ];
-  for (const { pattern, skus, on } of skuCases) {
-    it(`SKU pattern ${JSON.stringify(pattern)} → ${JSON.stringify(skus)}, sku_on_property ${JSON.stringify(on)}`, () => {
+  for (const { pattern, skus, skuOn, quantityOn } of skuCases) {
+    it(`SKU pattern ${JSON.stringify(pattern)} → ${JSON.stringify(skus)}, sku_on ${JSON.stringify(skuOn)}, quantity_on ${JSON.stringify(quantityOn)}`, () => {
       const result = payload({ ...base, skuPattern: pattern });
       assert.deepEqual(result.products.slice(0, 2).map((p) => p.sku), skus);
       assert.equal(result.products.every((p) => 'sku' in p), pattern !== null);
-      assert.deepEqual(result.sku_on_property, on);
+      assert.deepEqual(result.sku_on_property, skuOn);
+      assert.deepEqual(result.quantity_on_property, quantityOn);
     });
   }
 

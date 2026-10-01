@@ -68,7 +68,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
 
 ## Phase 2: draft-publisher
 
-- [x] **T7: Inventory payload builder** (done 2026-10-01; `buildInventory` returns `{ok, payload}` or field problems; a mapped value sends Etsy's value name (e.g. size `2X`), SKUs use the shop's names via `{design}`/`{size}`/`{color}`; `sku_on_property` lists only the properties the pattern uses; quantity is per size × color; the custom-color form `value_ids: []` comes from open-api discussion #1253 and is confirmed at Checkpoint C)
+- [x] **T7: Inventory payload builder** (done 2026-10-01; `buildInventory` returns `{ok, payload}` or field problems; a mapped value sends Etsy's value name (e.g. size `2X`), SKUs use the shop's names via `{design}`/`{size}`/`{color}`; `sku_on_property` lists only the properties the pattern uses; quantity is per size × color; `quantity_on_property` follows the SKU properties (products sharing a SKU share a quantity); the custom-color form `value_ids: []` comes from open-api discussion #1253 and is confirmed at Checkpoint C)
   - **Acceptance:** a pure function builds the `updateListingInventory` payload. It includes:
     - one product per size × color, each with SKU, price by size, quantity and `readiness_state_id`
     - the size property with its `scale_id`
