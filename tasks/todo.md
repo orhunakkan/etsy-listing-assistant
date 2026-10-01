@@ -90,7 +90,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
   - **Acceptance:** `scripts/publish-sample.mts` creates one draft. It has fixed harmless text, 2 sample images, sizes S/M × colors Black/White at placeholder prices, and the first processing, shipping and return profiles from reference data. It then reads the listing back and prints it.
   - **Verify:** run it once. Record in SPEC.md any field rule Etsy enforces differently.
   - **Files:** `scripts/publish-sample.mts`, `scripts/tsconfig.json`, `package.json` (typecheck wiring), `SPEC.md` (only if facts changed)
-- [ ] **CHECKPOINT C:** you open the draft in Shop Manager, confirm the photos, variations and prices, then delete it.
+- [x] **CHECKPOINT C:** you open the draft in Shop Manager, confirm the photos, variations and prices, then delete it. (approved 2026-10-01; draft 4586418920 confirmed and deleted by the seller. The custom-color form is still untried live)
 
 ## Phase 3: shop-settings and the client shell
 
