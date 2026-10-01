@@ -22,8 +22,10 @@ const base: InventoryInput = {
   skuPattern: '{design}-{size}-{color}',
   readinessStateId: READINESS,
   sizePropertyId: SIZE,
+  sizePropertyName: 'Size',
   sizeScaleId: SCALE,
   colorPropertyId: COLOR,
+  colorPropertyName: 'Primary color',
 };
 
 function payload(input: InventoryInput): InventoryPayload {
@@ -57,8 +59,8 @@ describe('buildInventory', () => {
     assert.deepEqual(first, {
       sku: 'SUNSET-TEE-S-BLACK',
       property_values: [
-        { property_id: SIZE, value_ids: [11], values: ['S'], scale_id: SCALE },
-        { property_id: COLOR, value_ids: [1], values: ['Black'] },
+        { property_id: SIZE, property_name: 'Size', value_ids: [11], values: ['S'], scale_id: SCALE },
+        { property_id: COLOR, property_name: 'Primary color', value_ids: [1], values: ['Black'] },
       ],
       offerings: [{ price: 22, quantity: 10, is_enabled: true, readiness_state_id: READINESS }],
     });
@@ -72,33 +74,36 @@ describe('buildInventory', () => {
 
   it('sends an unmapped color as a custom value: no value ids, the name as the value', () => {
     const custom = payload(base).products[1]?.property_values[1];
-    assert.deepEqual(custom, { property_id: COLOR, value_ids: [], values: ['Heather Grey'] });
+    assert.deepEqual(custom, { property_id: COLOR, property_name: 'Primary color', value_ids: [], values: ['Heather Grey'] });
   });
 
   it('sets the *_on_property arrays', () => {
     const { products: _products, ...onProperty } = payload(base);
     assert.deepEqual(onProperty, {
-      price_on_property: [SIZE],
+      price_on_property: [SIZE, COLOR],
       quantity_on_property: [SIZE, COLOR],
       sku_on_property: [SIZE, COLOR],
       readiness_state_on_property: [],
     });
   });
 
-  const skuCases: Array<{ pattern: string | null; skus: Array<string | undefined>; skuOn: number[]; quantityOn: number[] }> = [
-    { pattern: '{design}-{size}-{color}', skus: ['SUNSET-TEE-S-BLACK', 'SUNSET-TEE-S-HEATHER-GREY'], skuOn: [SIZE, COLOR], quantityOn: [SIZE, COLOR] },
-    { pattern: 'PP-{size}', skus: ['PP-S', 'PP-S'], skuOn: [SIZE], quantityOn: [SIZE] },
-    { pattern: '{color}/{design}', skus: ['BLACK/SUNSET-TEE', 'HEATHER-GREY/SUNSET-TEE'], skuOn: [COLOR], quantityOn: [COLOR] },
-    { pattern: 'FIXED', skus: ['FIXED', 'FIXED'], skuOn: [], quantityOn: [] },
-    { pattern: null, skus: [undefined, undefined], skuOn: [], quantityOn: [SIZE, COLOR] },
+  // Each non-empty *_on_property array is either one property or, once any names both,
+  // both (Etsy refuses a mix).
+  const skuCases: Array<{ pattern: string | null; skus: Array<string | undefined>; skuOn: number[]; quantityOn: number[]; priceOn: number[] }> = [
+    { pattern: '{design}-{size}-{color}', skus: ['SUNSET-TEE-S-BLACK', 'SUNSET-TEE-S-HEATHER-GREY'], skuOn: [SIZE, COLOR], quantityOn: [SIZE, COLOR], priceOn: [SIZE, COLOR] },
+    { pattern: 'PP-{size}', skus: ['PP-S', 'PP-S'], skuOn: [SIZE], quantityOn: [SIZE], priceOn: [SIZE] },
+    { pattern: '{color}/{design}', skus: ['BLACK/SUNSET-TEE', 'HEATHER-GREY/SUNSET-TEE'], skuOn: [COLOR], quantityOn: [COLOR], priceOn: [SIZE] },
+    { pattern: 'FIXED', skus: ['FIXED', 'FIXED'], skuOn: [], quantityOn: [], priceOn: [SIZE] },
+    { pattern: null, skus: [undefined, undefined], skuOn: [], quantityOn: [SIZE, COLOR], priceOn: [SIZE, COLOR] },
   ];
-  for (const { pattern, skus, skuOn, quantityOn } of skuCases) {
-    it(`SKU pattern ${JSON.stringify(pattern)} → ${JSON.stringify(skus)}, sku_on ${JSON.stringify(skuOn)}, quantity_on ${JSON.stringify(quantityOn)}`, () => {
+  for (const { pattern, skus, skuOn, quantityOn, priceOn } of skuCases) {
+    it(`SKU pattern ${JSON.stringify(pattern)} → ${JSON.stringify(skus)}, sku_on ${JSON.stringify(skuOn)}, quantity_on ${JSON.stringify(quantityOn)}, price_on ${JSON.stringify(priceOn)}`, () => {
       const result = payload({ ...base, skuPattern: pattern });
       assert.deepEqual(result.products.slice(0, 2).map((p) => p.sku), skus);
       assert.equal(result.products.every((p) => 'sku' in p), pattern !== null);
       assert.deepEqual(result.sku_on_property, skuOn);
       assert.deepEqual(result.quantity_on_property, quantityOn);
+      assert.deepEqual(result.price_on_property, priceOn);
     });
   }
 
