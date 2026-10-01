@@ -1,4 +1,4 @@
-# Nameless Project
+# Etsy Listing Assistant
 
 Local-only Node 24 repo with npm workspaces `client` and `server`, built by Claude Code. Install from the repo root only.
 
