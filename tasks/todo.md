@@ -64,7 +64,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
     - Tests for parsing recorded response shapes and finding the taxonomy node.
     - Live `etsy:reference`.
   - **Files:** `server/src/etsy/reference.ts`, `server/src/etsy/reference.test.ts`, `server/src/etsy-reference.ts`, `server/package.json` (+ `CLAUDE.md`)
-- [ ] **CHECKPOINT B:** you connect the shop in the browser via `localhost:3003/oauth/start`. `etsy:reference` output is reviewed together.
+- [x] **CHECKPOINT B:** you connect the shop in the browser via `localhost:3003/oauth/start`. `etsy:reference` output is reviewed together. (approved 2026-10-01; shop PrimePressDesigns connected; T-shirt node 482 Gender-Neutral Adult, size property 62809790533 on scale 51 "Unisex letter size" with Etsy values 2X/3X/4X (not 2XL), color property 200)
 
 ## Phase 2: draft-publisher
 
