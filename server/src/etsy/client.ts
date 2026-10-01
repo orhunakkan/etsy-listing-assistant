@@ -99,3 +99,26 @@ async function errorDetail(res: Response): Promise<string> {
   detail = detail.trim();
   return detail.length > MAX_ERROR_DETAIL ? `${detail.slice(0, MAX_ERROR_DETAIL)}…` : detail;
 }
+
+// The bearer token source for withAuth; token-store.ts implements it.
+export type BearerTokens = { get: () => Promise<string>; refreshAfter: (rejected: string) => Promise<string> };
+
+// Wraps the keyed client for endpoints that need the shop's OAuth token. A 401 triggers
+// one refresh and one retry. Request bodies must be reusable (string, URLSearchParams,
+// FormData), not streams, because the retry sends the same init again.
+export function withAuth(etsyFetch: EtsyFetch, tokens: BearerTokens): EtsyFetch {
+  const send = (path: string, init: RequestInit, token: string): Promise<Response> => {
+    const headers = new Headers(init.headers);
+    headers.set('authorization', `Bearer ${token}`);
+    return etsyFetch(path, { ...init, headers });
+  };
+  return async (path, init = {}) => {
+    const token = await tokens.get();
+    try {
+      return await send(path, init, token);
+    } catch (error) {
+      if (!(error instanceof EtsyError && error.status === 401)) throw error;
+      return send(path, init, await tokens.refreshAfter(token));
+    }
+  };
+}

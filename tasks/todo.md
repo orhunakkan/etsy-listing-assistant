@@ -43,7 +43,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
     - A different `etsy_shop_id` than the stored one is refused.
   - **Verify:** tests for PKCE generation, `state` handling, same-shop refusal, and a token exchange against a fake `fetch`.
   - **Files:** `server/src/etsy/oauth.ts`, `server/src/etsy/oauth.test.ts`, `server/src/etsy/token-store.ts`, `server/src/index.ts`
-- [ ] **T5: Token refresh**
+- [x] **T5: Token refresh** (done 2026-10-01; `createAccessTokens` in `token-store.ts`, `withAuth` in `client.ts`, `/api/shop` in `app.ts`; the live "shows the shop and expiry" output waits for the connection at Checkpoint B)
   - **Acceptance:**
     - Expired access tokens refresh before use, single-flight.
     - A 401 triggers one refresh and one retry.

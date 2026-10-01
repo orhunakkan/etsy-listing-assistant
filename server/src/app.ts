@@ -3,6 +3,7 @@
 import { Hono } from 'hono';
 import { secureHeaders } from 'hono/secure-headers';
 import { OAuthError, type OAuthFlow } from './etsy/oauth.ts';
+import type { ShopStatus } from './etsy/token-store.ts';
 import { localOnly } from './http/local-only.ts';
 
 export const HOSTNAME = '127.0.0.1';
@@ -11,6 +12,7 @@ const VITE_DEV_PORT = 5173; // in dev the Vite server proxies /api to this one, 
 
 export type AppDeps = {
   oauth?: OAuthFlow | undefined; // undefined when the Etsy keys aren't configured
+  shopStatus?: (() => ShopStatus) | undefined;
 };
 
 export function createApp(deps: AppDeps = {}): Hono {
@@ -31,6 +33,8 @@ export function createApp(deps: AppDeps = {}): Hono {
   );
 
   app.get('/api/health', (c) => c.json({ ok: true }));
+
+  app.get('/api/shop', (c) => (deps.shopStatus ? c.json(deps.shopStatus()) : c.json({ error: 'not configured' }, 503)));
 
   // Plain-text pages for now; the Connect page (T13) replaces them.
   const notConfigured = 'Etsy is not configured: set ETSY_KEYSTRING and ETSY_SHARED_SECRET in .env, then restart the server.';

@@ -8,7 +8,8 @@ Local-only Node 24 repo with npm workspaces `client` and `server`, built by Clau
 - `npm test`: runs every workspace's `node:test` suite (`*.test.ts` next to the code). Run it before finishing any change.
 - `npm start --workspace=server`: starts the server on `http://localhost:3003`, bound to `127.0.0.1` only.
 - `npm run jev:check`: makes one real Jev call to confirm the API key and connection work.
-- `npm run etsy:check`: makes one real Etsy call (`openapi-ping`) to confirm `ETSY_KEYSTRING` and `ETSY_SHARED_SECRET` work. Logs it to `data/app.db`.
+- `npm run etsy:check`: makes one real Etsy call (`openapi-ping`) to confirm `ETSY_KEYSTRING` and `ETSY_SHARED_SECRET` work. If a shop is connected, makes one more (`getMe`) with its token, refreshing it if needed, and prints the shop, token expiry and 24-hour call count. Logs every call to `data/app.db`.
+- **Connecting the shop:** start the server and open `http://localhost:3003/oauth/start`. `GET /api/shop` shows the connection status.
 
 ## Work in progress
 
