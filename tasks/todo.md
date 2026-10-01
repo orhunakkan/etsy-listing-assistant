@@ -53,7 +53,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
     - Tests: two concurrent calls on an expired token produce exactly one refresh.
     - `etsy:check` shows the shop and expiry.
   - **Files:** `server/src/etsy/token-store.ts`, `server/src/etsy/client.ts`, `server/src/etsy/token-store.test.ts`, `server/src/etsy-check.ts`
-- [ ] **T6: Shop reference data**
+- [x] **T6: Shop reference data** (done 2026-10-01; `zod` 4.6.5 added here, earlier than T11, to parse Etsy responses as SPEC Security asks, and it passes the TS 7 typecheck; the T-shirt node is left unchosen when ambiguous; the live `etsy:reference` run is part of Checkpoint B)
   - **Acceptance:** `reference.ts` fetches:
     - shipping profiles, return policies, processing profiles and sections
     - the T-shirt taxonomy node, found by walking `getSellerTaxonomyNodes`

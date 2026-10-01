@@ -8,11 +8,13 @@
     "test": "node --test \"src/**/*.test.ts\"",
     "start": "node --env-file-if-exists=../.env src/index.ts",
     "jev:check": "node --env-file-if-exists=../.env src/jev-check.ts",
-    "etsy:check": "node --env-file-if-exists=../.env src/etsy-check.ts"
+    "etsy:check": "node --env-file-if-exists=../.env src/etsy-check.ts",
+    "etsy:reference": "node --env-file-if-exists=../.env src/etsy-reference.ts"
   },
   "dependencies": {
     "@typesafe-ai/sdk": "0.6.0",
-    "hono": "4.13.12"
+    "hono": "4.13.12",
+    "zod": "4.6.5"
   },
   "devDependencies": {
     "@types/node": "24.19.0"
