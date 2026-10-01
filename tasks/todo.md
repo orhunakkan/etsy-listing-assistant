@@ -78,7 +78,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
     Value strings are validated.
   - **Verify:** table-driven tests, including a color with parentheses (rejected) and an unmapped color (sent as a custom value).
   - **Files:** `server/src/publisher/inventory.ts`, `server/src/publisher/inventory.test.ts`
-- [ ] **T8: Resumable push pipeline**
+- [x] **T8: Resumable push pipeline** (done 2026-10-01; `createPublisher(...)(itemId, {listing, inventory})` only records push state, and item status stays with the T17 state machine; tags and materials go as comma-joined form values (tutorial's `image_ids` form), and an entry containing a comma is refused; adoption pages through every draft (no sort without a search option), compares titles after decoding HTML entities, and allows 60 s of clock skew; image ranks must be 1..n)
   - **Acceptance:** `publish(itemId)` implements the spec's algorithm:
     - `push_started_at` → create → `etsy_listing_id`
     - images with `rank` + `overwrite` → `etsy_image_id`
