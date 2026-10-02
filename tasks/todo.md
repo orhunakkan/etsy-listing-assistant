@@ -127,7 +127,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
     - Server validation errors appear next to their fields.
   - **Verify:** browser pass, then save and reload.
   - **Files:** `client/src/pages/Settings.tsx`, `client/src/api.ts`, `client/src/App.tsx`
-- [ ] **CHECKPOINT D:** you enter your real product details in Settings. **Needs your sizes, colors, prices, quantity, SKU format, packed weight and dimensions, and footer.**
+- [x] **CHECKPOINT D:** you enter your real product details in Settings. **Needs your sizes, colors, prices, quantity, SKU format, packed weight and dimensions, and footer.** (approved 2026-10-02 with the Settings entry deferred: the seller fills Settings in before Checkpoint E, which needs at least the colors. Open points for that entry: rename "Daisy (Yellow)", confirm the shipping profile (the sample listing shows "2024 Shipping (Fixed)", the API returned only "Prime Press Shipping"), and drop the footer lines about personalization and Disney)
 
 ## Phase 4: batch-review
 
@@ -159,7 +159,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
     - The Push button is present but disabled ("Guard not built yet").
   - **Verify:** browser pass.
   - **Files:** `client/src/pages/Review.tsx`, `client/src/components/ItemEditor.tsx`, `client/src/api.ts`
-- [ ] **CHECKPOINT E:** a real batch folder of yours goes through intake and review.
+- [ ] **CHECKPOINT E:** a real batch folder of yours goes through intake and review. **Before it: fill in Settings (deferred from Checkpoint D); the review needs your colors.**
 
 ## Phase 5: copywriter
 

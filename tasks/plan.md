@@ -94,7 +94,7 @@ At each checkpoint the agent stops and reports. Work continues only after you co
 |---|---|
 | Checkpoint B | Approve Etsy's consent screen in your browser |
 | Checkpoint C | Look at the sample draft in Shop Manager, then delete it |
-| **Before Checkpoint D (T14)** | **Product details:** sizes, colors, price per size, default quantity, SKU format, packed weight and dimensions. Plus your description footer and the answer to the mockup-colors question |
+| **Before Checkpoint E** (deferred from Checkpoint D on 2026-10-02) | **Product details:** sizes, colors, price per size, default quantity, SKU format, packed weight and dimensions. Plus your description footer and the answer to the mockup-colors question |
 | Checkpoint F | Judge generated listings for 3 real designs |
 | Checkpoint G | Accept or adjust the guard thresholds based on the eval |
 | Checkpoint H | Final acceptance |
