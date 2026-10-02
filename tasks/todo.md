@@ -94,7 +94,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
 
 ## Phase 3: shop-settings and the client shell
 
-- [ ] **T10: Etsy text rules**
+- [x] **T10: Etsy text rules** (done 2026-10-02; regexes copied from the createDraftListing field descriptions in the live OpenAPI spec, which states no title or tag lengths, so 140/13/20 stay unverified; lengths count characters, not UTF-16 units; `checkDescription` only requires text, as Etsy states no rules for it; `inventory.ts` keeps its own parenthesis check for now)
   - **Acceptance:** `guard/rules.ts` validates title, tags, materials, styles, alt text and variation value strings, with the regexes copied from the OpenAPI spec. Each error names the field and the reason.
   - **Verify:** table-driven tests, including math symbols in a title and a tag at exactly 20 and at 21 characters.
   - **Files:** `server/src/guard/rules.ts`, `server/src/guard/rules.test.ts`
