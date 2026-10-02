@@ -121,7 +121,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
     - Browser pass at `:3003` and `:5173`.
     - The spec's security headers appear on the page response.
   - **Files:** `scripts/dev.mts`, `package.json`, `server/src/index.ts`, `client/src/App.tsx`, `client/src/pages/Connect.tsx` (+ `CLAUDE.md`)
-- [ ] **T14: Settings page**
+- [x] **T14: Settings page** (done 2026-10-02; nav (Shop, Settings) with history routing in `App.tsx`. The form keeps strings in a draft (`client/src/settings-draft.ts`, with `node:test` tests; the client now has a `test` script and its tests are typed by `tsconfig.node.json`). Profiles are preselected only when the shop has exactly one, typing a color name that matches an Etsy color picks it, and "Add every size on this scale" fills the size table. Browser pass: one save showed all 17 problems next to their fields and in a summary (this needed the server to report text rules alongside schema errors, plus "is required" for blanks); a valid save survived a reload; no horizontal scroll at 390 px. The test row was then deleted, so the settings table is empty for Checkpoint D)
   - **Acceptance:**
     - A form for every setting: profile dropdowns filled from reference data, a color → Etsy color value mapping, and a price-per-size table.
     - Server validation errors appear next to their fields.

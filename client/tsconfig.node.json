@@ -6,7 +6,8 @@
     "lib": ["es2025"],
     "module": "nodenext",
     "types": ["node"],
+    "rewriteRelativeImportExtensions": true,
     "noEmit": true
   },
-  "include": ["vite.config.ts"]
+  "include": ["vite.config.ts", "src/**/*.test.ts"]
 }
