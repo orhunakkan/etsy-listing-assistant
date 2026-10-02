@@ -4,36 +4,42 @@
 // Etsy's text rules, so a push never fails on a bad default.
 import type { DatabaseSync } from 'node:sqlite';
 import { z } from 'zod';
-import { checkDescription, checkMaterials, type RuleError } from '../guard/rules.ts';
+import { checkDescription, checkMaterials, checkVariationValue, type RuleError } from '../guard/rules.ts';
 import { buildInventory } from '../publisher/inventory.ts';
 
 const SAMPLE_DESIGN = 'Design'; // stands in for {design} when checking the SKU pattern
 
-const id = z.int().positive();
-const EtsyValue = z.object({ valueId: id, name: z.string() });
+// A blank form field arrives as null (or missing); say so plainly instead of zod's
+// "expected number, received null". Anything else keeps zod's own message.
+const required: z.core.$ZodErrorMap = (issue) => (issue.input === undefined || issue.input === null ? 'is required' : undefined);
+const req = { error: required };
+
+const id = z.int(req).positive();
+const text = z.string(req);
+const EtsyValue = z.object({ valueId: id, name: text }, req);
 
 export const Settings = z.object({
   // Resolved once from the shop's reference data, never hard-coded (SPEC.md → Boundaries).
   etsy: z.object({
     taxonomyId: id,
     sizePropertyId: id,
-    sizePropertyName: z.string().min(1),
+    sizePropertyName: text.min(1),
     sizeScaleId: id,
     colorPropertyId: id,
-    colorPropertyName: z.string().min(1),
+    colorPropertyName: text.min(1),
   }),
-  sizes: z.array(z.object({ name: z.string(), etsy: EtsyValue, price: z.number() })),
-  colors: z.array(z.object({ name: z.string(), etsy: EtsyValue.nullable() })), // null: sent as a custom value
-  quantity: z.int(),
-  skuPattern: z.string().nullable(),
+  sizes: z.array(z.object({ name: text, etsy: EtsyValue, price: z.number(req) }), req),
+  colors: z.array(z.object({ name: text, etsy: EtsyValue.nullable() }), req), // null: sent as a custom value
+  quantity: z.int(req),
+  skuPattern: text.nullable(),
   // Packed size of one shirt; calculated shipping profiles need it (SPEC.md → createDraftListing).
   itemSize: z.object({
-    weight: z.number().positive(),
-    weightUnit: z.enum(['oz', 'lb', 'g', 'kg']),
-    length: z.number().positive(),
-    width: z.number().positive(),
-    height: z.number().positive(),
-    dimensionsUnit: z.enum(['in', 'ft', 'mm', 'cm', 'm', 'yd']),
+    weight: z.number(req).positive(),
+    weightUnit: z.enum(['oz', 'lb', 'g', 'kg'], req),
+    length: z.number(req).positive(),
+    width: z.number(req).positive(),
+    height: z.number(req).positive(),
+    dimensionsUnit: z.enum(['in', 'ft', 'mm', 'cm', 'm', 'yd'], req),
   }),
   listing: z.object({
     shippingProfileId: id,
@@ -41,10 +47,10 @@ export const Settings = z.object({
     readinessStateId: id, // the processing profile
     shopSectionId: id.nullable(),
   }),
-  materials: z.array(z.string()),
-  footer: z.string(), // appended word for word to every description
-  voice: z.string(),
-  bannedTerms: z.array(z.string()),
+  materials: z.array(text, req),
+  footer: text, // appended word for word to every description
+  voice: text,
+  bannedTerms: z.array(text, req),
 });
 export type Settings = z.infer<typeof Settings>;
 
@@ -55,10 +61,50 @@ function fieldName(path: readonly PropertyKey[]): string {
   return path.map((key, i) => (typeof key === 'number' ? `[${key}]` : `${i === 0 ? '' : '.'}${String(key)}`)).join('');
 }
 
+const NamedRow = z.object({ name: z.string(), etsy: z.object({ name: z.string() }).nullish() });
+
+// Etsy's text rules need only the text fields, so they run on whatever parts are well
+// formed, even when other fields are wrong. One save then reports every problem.
+function textRuleErrors(input: unknown): RuleError[] {
+  const record: Record<string, unknown> = typeof input === 'object' && input !== null ? { ...input } : {};
+  const errors: RuleError[] = [];
+  for (const list of ['sizes', 'colors'] as const) {
+    const rows: unknown[] = Array.isArray(record[list]) ? record[list] : [];
+    rows.forEach((row, i) => {
+      const parsed = NamedRow.safeParse(row);
+      if (!parsed.success) return;
+      errors.push(...checkVariationValue(parsed.data.name, `${list}[${i}].name`));
+      if (parsed.data.etsy) errors.push(...checkVariationValue(parsed.data.etsy.name, `${list}[${i}].etsy.name`));
+    });
+  }
+  const materials = Settings.shape.materials.safeParse(record['materials']);
+  if (materials.success) errors.push(...checkMaterials(materials.data));
+  const footer = Settings.shape.footer.safeParse(record['footer']);
+  if (footer.success) errors.push(...checkDescription(footer.data, 'footer'));
+  const bannedTerms = Settings.shape.bannedTerms.safeParse(record['bannedTerms']);
+  bannedTerms.data?.forEach((term, i) => {
+    if (term.trim() === '') errors.push({ field: `bannedTerms[${i}]`, reason: 'is empty' });
+  });
+  return errors;
+}
+
+// The inventory builder repeats the value-string checks, so identical errors are merged.
+function unique(errors: readonly RuleError[]): RuleError[] {
+  const seen = new Set<string>();
+  return errors.filter((e) => {
+    const key = `${e.field}\n${e.reason}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 export function validateSettings(input: unknown): SettingsResult {
   const parsed = Settings.safeParse(input);
+  const textErrors = textRuleErrors(input);
   if (!parsed.success) {
-    return { ok: false, errors: parsed.error.issues.map((issue) => ({ field: fieldName(issue.path), reason: issue.message })) };
+    const schemaErrors = parsed.error.issues.map((issue) => ({ field: fieldName(issue.path), reason: issue.message }));
+    return { ok: false, errors: [...schemaErrors, ...textErrors] };
   }
   const settings = parsed.data;
   const inventory = buildInventory({
@@ -70,14 +116,7 @@ export function validateSettings(input: unknown): SettingsResult {
     skuPattern: settings.skuPattern,
     readinessStateId: settings.listing.readinessStateId,
   });
-  const errors: RuleError[] = [
-    ...(inventory.ok ? [] : inventory.problems),
-    ...checkMaterials(settings.materials),
-    ...checkDescription(settings.footer, 'footer'),
-  ];
-  settings.bannedTerms.forEach((term, i) => {
-    if (term.trim() === '') errors.push({ field: `bannedTerms[${i}]`, reason: 'is empty' });
-  });
+  const errors = unique([...(inventory.ok ? [] : inventory.problems), ...textErrors]);
   return errors.length > 0 ? { ok: false, errors } : { ok: true, settings };
 }
 

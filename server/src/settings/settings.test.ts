@@ -53,6 +53,18 @@ describe('validateSettings', () => {
     assert.deepEqual(fields.toSorted(), ['itemSize.weightUnit', 'listing.shippingProfileId', 'quantity']);
   });
 
+  it('reports text rule errors alongside schema errors, so one save shows everything', () => {
+    const colors = [{ name: 'Daisy (Yellow)', etsy: null }];
+    const sizes = [{ name: 'S', etsy: { valueId: 11, name: 'S' }, price: null }];
+    assert.deepEqual(errors({ ...valid, quantity: null, sizes, colors, materials: ['100% cotton'], footer: '' }), [
+      'sizes[0].price: is required',
+      'quantity: is required',
+      'colors[0].name: contains parentheses, which Etsy does not allow',
+      'materials[0]: contains characters Etsy does not allow: "%"',
+      'footer: is empty',
+    ]);
+  });
+
   it('rejects a body that is not an object', () => {
     assert.deepEqual(errors(null).length, 1);
   });
