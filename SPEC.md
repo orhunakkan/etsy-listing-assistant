@@ -94,6 +94,8 @@ Checked 2026-10-01 against the live OpenAPI spec and developers.etsy.com. **(unv
   - **Tags:** at most 13, each at most 20 characters (unverified). Allowed: letters, digits, spaces, `-`, `'`, ™©®.
   - **Materials:** letters, digits and spaces only.
   - **Styles:** at most 2, each at most 45 characters.
+  - **Description:** required. The OpenAPI spec gives no character or length rules for it.
+  - **Alt text:** at most 500 characters, with no character rules.
 - **Images:** `uploadListingImage` is multipart (`image`, `rank`, `overwrite`, `alt_text` up to 500 chars). With `overwrite=true`, an image replaces whatever is already at that rank, which is what makes retries safe. Up to 20 images per listing. The 20 MB file limit is unverified.
 - **Variations:** `updateListingInventory` takes JSON products. Each product has `property_values: [{property_id, property_name, value_ids, values, scale_id?}]` and `offerings: [{price, quantity, is_enabled, readiness_state_id}]`, plus the `price_on_property` / `quantity_on_property` / `sku_on_property` / `readiness_state_on_property` arrays.
   - **Rules Etsy enforces beyond the OpenAPI schema (seen live 2026-10-01, T9):**
