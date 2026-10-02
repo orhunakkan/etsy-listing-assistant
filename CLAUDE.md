@@ -20,7 +20,7 @@ The approved spec is [SPEC.md](SPEC.md). Work follows [tasks/plan.md](tasks/plan
 
 - **TypeScript 7.0.2, pinned exactly.** Never downgrade TypeScript or override peer dependencies to force a package in. Before adding any dependency, confirm it supports TS 7: check its `typescript` peer range, its shipped types, and whether it calls the compiler API (TS 7 has no stable JS compiler API). If it doesn't support TS 7, pick an alternative.
 - **Pin every dependency exactly** (`npm install --save-exact`). Tools shared across the repo go at the root; workspace-specific packages go in that workspace.
-- **Don't loosen the strict config.** `tsconfig.base.json` holds the shared strict settings, and every TS project extends it: `server/tsconfig.json` and `.claude/hooks/tsconfig.json`. A new TS project must extend it too, and must be added to `npm run typecheck`.
+- **Don't loosen the strict config.** `tsconfig.base.json` holds the shared strict settings, and every TS project extends it: `server/tsconfig.json`, `client/tsconfig.json` (browser code), `client/tsconfig.node.json` (`vite.config.ts`), `scripts/tsconfig.json` and `.claude/hooks/tsconfig.json`. A new TS project must extend it too, and must be added to `npm run typecheck`.
 - **Fix type errors; never silence them.** Don't add `any`, `@ts-ignore`, `@ts-expect-error` or non-null `!` just to get a clean check.
 - **Dependency types are checked.** `skipLibCheck` is off, so a package with types that don't work under TS 7 fails `npm run typecheck`. Treat that as a reason to reject the package.
 - **`noUncheckedIndexedAccess`:** indexed values can be `undefined`, so handle it.

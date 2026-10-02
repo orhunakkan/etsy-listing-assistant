@@ -104,7 +104,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
     - `GET /api/reference` serves the cached reference data.
   - **Verify:** tests for schema validation and for rule errors in the footer and colors.
   - **Files:** `server/src/settings/settings.ts`, `server/src/settings/routes.ts`, `server/src/settings/settings.test.ts`, `server/src/index.ts`
-- [ ] **T12: Client scaffold (proves TS 7 compatibility)**
+- [x] **T12: Client scaffold (proves TS 7 compatibility)** (done 2026-10-02; React 19.3.0, Vite 8.3.1 and plugin-react 6.1.1 types all pass with `skipLibCheck: false`, so no fallback is needed; `vite.config.ts` gets its own `tsconfig.node.json` so browser code can't use Node types; no `vite/client` types yet; the empty leftover `client/public/index.html` was removed)
   - **Acceptance:**
     - `client/` is a module workspace with React 19.3, Vite 8.3 and plugin-react 6.1, pinned exactly.
     - Its `tsconfig` extends the base and is included in `npm run typecheck`, which passes with `skipLibCheck: false`.
