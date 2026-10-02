@@ -6,6 +6,7 @@ import { secureHeaders } from 'hono/secure-headers';
 import { OAuthError, type OAuthFlow } from './etsy/oauth.ts';
 import type { ShopStatus } from './etsy/token-store.ts';
 import { localOnly } from './http/local-only.ts';
+import { serveClient } from './http/static.ts';
 import { type ReferenceSource, settingsRoutes } from './settings/routes.ts';
 
 export const HOSTNAME = '127.0.0.1';
@@ -17,6 +18,7 @@ export type AppDeps = {
   shopStatus?: (() => ShopStatus) | undefined;
   db?: DatabaseSync | undefined; // enables /api/settings and /api/reference
   reference?: ReferenceSource | undefined; // undefined when the Etsy keys aren't configured
+  clientDir?: string | undefined; // the built client (client/dist); undefined in dev, where Vite serves it
 };
 
 export function createApp(deps: AppDeps = {}): Hono {
@@ -58,6 +60,8 @@ export function createApp(deps: AppDeps = {}): Hono {
       return c.text('Connecting to Etsy failed. See the server log for details, then start again.', 502);
     }
   });
+
+  if (deps.clientDir) serveClient(app, deps.clientDir); // last, so it never shadows a route above
 
   return app;
 }

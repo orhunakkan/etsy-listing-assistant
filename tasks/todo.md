@@ -111,7 +111,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
     - `vite build` succeeds.
   - **Verify:** typecheck and build. If the types fail, apply the spec's fallback or stop and ask.
   - **Files:** `client/package.json`, `client/tsconfig.json`, `client/vite.config.ts`, `client/index.html`, `client/src/main.tsx`
-- [ ] **T13: Dev runner, `npm start` and the Connect page**
+- [x] **T13: Dev runner, `npm start` and the Connect page** (done 2026-10-02; static files go through Hono's generic `serveStatic` with our own Node file reads (`server/src/http/static.ts`, tested against traversal), registered after the API routes; unknown non-API paths get `index.html`. The Vite proxy uses `changeOrigin` so the server's Host check passes. Styles are linked from `index.html`, so no `vite/client` types are needed. Browser pass at :3003 and :5173 with no console errors, and the page response carries the CSP, `X-Frame-Options` and `nosniff` headers. Killing the server child stopped Vite and the runner (exit 1); Ctrl+C itself wasn't testable from the agent's shell)
   - **Acceptance:**
     - `npm run dev` starts both processes with Vite proxying `/api` and `/oauth`, and Ctrl+C stops both.
     - `npm start` builds and the server serves `client/dist`.

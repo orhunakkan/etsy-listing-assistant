@@ -1,12 +1,14 @@
-// The React entry point. The app shell and pages arrive in T13.
+// The React entry point. Styles are linked from index.html, so Vite bundles them
+// without TS needing CSS module types.
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { App } from './App.tsx';
 
 const root = document.getElementById('root');
 if (!root) throw new Error('index.html has no #root element');
 
 createRoot(root).render(
   <StrictMode>
-    <h1>Etsy Listing Assistant</h1>
+    <App />
   </StrictMode>,
 );
