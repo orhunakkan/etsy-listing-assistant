@@ -111,17 +111,17 @@ describe('buildInventory', () => {
     {
       name: 'a color with parentheses',
       input: { ...base, colors: [{ name: 'Navy (Dark)', etsy: null }] },
-      expected: ['colors[0].name: "Navy (Dark)" contains parentheses, which Etsy rejects'],
+      expected: ['colors[0].name: contains parentheses, which Etsy does not allow'],
     },
     {
       name: 'an Etsy value name with parentheses',
       input: { ...base, sizes: [{ name: 'S', etsy: { valueId: 11, name: 'S (Youth)' }, price: 20 }] },
-      expected: ['sizes[0].etsy.name: "S (Youth)" contains parentheses, which Etsy rejects'],
+      expected: ['sizes[0].etsy.name: contains parentheses, which Etsy does not allow'],
     },
     {
       name: 'a blank color name',
       input: { ...base, colors: [{ name: '  ', etsy: null }] },
-      expected: ['colors[0].name: "  " is empty'],
+      expected: ['colors[0].name: is empty'],
     },
     {
       name: 'duplicate colors that differ only in case and spacing',

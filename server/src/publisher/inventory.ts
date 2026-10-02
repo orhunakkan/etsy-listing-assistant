@@ -5,8 +5,8 @@
 //
 // A color with no Etsy match is sent as a custom value: `value_ids: []` and the name in
 // `values` (https://github.com/etsy/open-api/discussions/1253). Checkpoint C confirms it.
+import { checkVariationValue } from '../guard/rules.ts';
 
-const FORBIDDEN_IN_VALUE = /[()]/; // "parenthesis characters are not allowed" (OpenAPI, property_values)
 const SKU_TOKEN = /\{(\w+)\}/g;
 const SKU_TOKENS = new Set(['design', 'size', 'color']);
 
@@ -53,12 +53,6 @@ export function skuPart(name: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
-function valueProblem(value: string): string | undefined {
-  if (value.trim() === '') return 'is empty';
-  if (FORBIDDEN_IN_VALUE.test(value)) return 'contains parentheses, which Etsy rejects';
-  return undefined;
-}
-
 function checkOptions(field: string, options: ReadonlyArray<{ name: string; etsy: EtsyValue | null }>): InventoryProblem[] {
   const problems: InventoryProblem[] = [];
   if (options.length === 0) problems.push({ field, reason: 'needs at least one value' });
@@ -66,8 +60,7 @@ function checkOptions(field: string, options: ReadonlyArray<{ name: string; etsy
   options.forEach((option, i) => {
     const at = `${field}[${i}]`;
     for (const [where, value] of [['name', option.name], ['etsy.name', option.etsy?.name]] as const) {
-      const reason = value === undefined ? undefined : valueProblem(value);
-      if (reason) problems.push({ field: `${at}.${where}`, reason: `"${value}" ${reason}` });
+      if (value !== undefined) problems.push(...checkVariationValue(value, `${at}.${where}`));
     }
     const key = skuPart(option.name);
     if (key !== '' && seen.has(key)) problems.push({ field: `${at}.name`, reason: `"${option.name}" duplicates an earlier value` });
