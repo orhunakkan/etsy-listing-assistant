@@ -98,7 +98,7 @@ Plan: [plan.md](plan.md). Spec: [SPEC.md](../SPEC.md).
   - **Acceptance:** `guard/rules.ts` validates title, tags, materials, styles, alt text and variation value strings, with the regexes copied from the OpenAPI spec. Each error names the field and the reason.
   - **Verify:** table-driven tests, including math symbols in a title and a tag at exactly 20 and at 21 characters.
   - **Files:** `server/src/guard/rules.ts`, `server/src/guard/rules.test.ts`
-- [ ] **T11: Settings API**
+- [x] **T11: Settings API** (done 2026-10-02; routes in `server/src/settings/routes.ts`, mounted at `/api` in `app.ts`. Settings include the Etsy taxonomy/property/scale ids, so pushes never look them up again. Saving runs the real `buildInventory` plus `rules.ts`, so saved settings always build a valid inventory. Errors come back as `{errors: [{field, reason}]}` with paths like `sizes[0].price`. Reference data is cached in memory per server run (single-flight, failures not cached), with no schema change; `POST /api/reference/refresh` refetches it. The live server returned the shop's reference data, and a foreign-origin PUT got 403)
   - **Acceptance:**
     - `GET`/`PUT /api/settings` covers the full settings: sizes, colors with Etsy value mapping, price per size, quantity, SKU pattern, packed weight and dimensions (needed by calculated shipping, found in T9), listing defaults (profile ids), materials, footer, voice and banned terms. It is checked with a zod schema and with `rules.ts`.
     - `GET /api/reference` serves the cached reference data.
